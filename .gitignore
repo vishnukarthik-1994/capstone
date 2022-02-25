@@ -1,0 +1,10 @@
+bin/
+build/
+html/
+latex/
+tmp/
+.vscode/
+~*
+_.o
+_.a
+_.jpg:Zone.Identifier
