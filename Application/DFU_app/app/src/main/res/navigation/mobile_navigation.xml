@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.dfu_app.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_nav_home_to_nav_analysis_record"
+            app:destination="@id/nav_analysis_record" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_daily_survey"
+            app:destination="@id/nav_daily_survey" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_daily_survey"
+        android:name="com.example.dfu_app.ui.daily_survey.DailySurveyFragment"
+        android:label="@string/menu_daily_survey"
+        tools:layout="@layout/fragment_daily_survey" >
+        <action
+            android:id="@+id/action_nav_daily_survey_to_nav_analysis_record"
+            app:destination="@id/nav_analysis_record" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_register"
+        android:name="com.example.dfu_app.ui.register.RegisterFragment"
+        android:label="@string/menu_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_nav_register_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_analysis_record"
+        android:name="com.example.dfu_app.ui.analysis_record.AnalysisRecordFragment"
+        android:label="@string/menu_diagnostic_record"
+        tools:layout="@layout/fragment_analysis_record" />
+    <fragment
+        android:id="@+id/nav_login"
+        android:name="com.example.dfu_app.ui.login.LoginFragment"
+        android:label="@string/menu_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_nav_login_to_nav_home"
+            app:destination="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_login_to_nav_register"
+            app:destination="@id/nav_register" />
+    </fragment>
+</navigation>

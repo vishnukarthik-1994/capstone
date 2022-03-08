@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.daily_survey.DailySurveyFragment">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+        <Button
+            android:id="@+id/camera_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/take_picture"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/retrieve_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/take_picture"
+            app:layout_constraintStart_toEndOf="@id/camera_button"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/foot_image"
+            android:layout_width="288dp"
+            android:layout_height="219dp"
+            app:srcCompat="@drawable/footprint"
+            tools:layout_editor_absoluteX="107dp"
+            tools:layout_editor_absoluteY="39dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/camera_button" />
+        <TextView
+            android:id="@+id/blood_sugar_level_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/blood_sugar_levels"
+            app:layout_constraintStart_toStartOf="@+id/foot_image"
+            app:layout_constraintTop_toBottomOf="@+id/foot_image" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/blood_sugar_level"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:hint="@string/blood_pressure"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/blood_sugar_level_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/blood_sugar_level_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/blood_pressure_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/blood_pressure"
+            app:layout_constraintStart_toEndOf="@id/blood_sugar_level"
+            app:layout_constraintTop_toBottomOf="@+id/foot_image" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/blood_pressure"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/blood_pressure"
+            app:layout_constraintStart_toStartOf="@id/blood_pressure_text"
+            app:layout_constraintTop_toBottomOf="@id/blood_pressure_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/blood_pressure_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/feeling_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/foot_feeling"
+            app:layout_constraintStart_toStartOf="@id/blood_sugar_level"
+            app:layout_constraintTop_toBottomOf="@id/blood_sugar_level" />
+
+        <RadioGroup
+            android:id="@+id/feeling_options"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/option_no_feeling"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="@id/feeling_question"
+            app:layout_constraintTop_toBottomOf="@id/feeling_question">
+
+            <RadioButton
+                android:id="@+id/option_no_feeling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/feeling_no_feeling" />
+
+            <RadioButton
+                android:id="@+id/option_burning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/feeling_burning" />
+            <RadioButton
+                android:id="@+id/option_dull"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/feeling_burning" />
+
+        </RadioGroup>
+
+
+        <Button
+            android:id="@+id/submit_dail_survey_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/summit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/feeling_options"
+            app:layout_constraintTop_toBottomOf="@+id/feeling_options" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
