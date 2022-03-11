@@ -4,6 +4,7 @@ import android.R.attr
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.os.Environment
 import android.view.Menu
 import android.widget.ImageView
 import androidx.annotation.Nullable
@@ -15,8 +16,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.dfu_app.databinding.ActivityMainBinding
+import com.example.dfu_app.imageprocessor.ImagePreprocessing
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        ImagePreprocessing.absolutePath = getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!.absolutePath
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

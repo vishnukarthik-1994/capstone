@@ -14,10 +14,9 @@ android {
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
 
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -35,6 +34,9 @@ android {
         viewBinding true
     }
     buildToolsVersion '32.0.0'
+    packagingOptions {
+        pickFirst "**"
+    }
 }
 
 dependencies {
@@ -60,5 +62,9 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
-
+    //Pytorch
+    implementation 'org.pytorch:pytorch_android_lite:1.10.0'
+    implementation 'org.pytorch:pytorch_android_torchvision_lite:1.10.0'
+    implementation 'org.pytorch:torchvision_ops:0.10.0'
+    implementation 'com.facebook.soloader:nativeloader:0.8.0'
 }

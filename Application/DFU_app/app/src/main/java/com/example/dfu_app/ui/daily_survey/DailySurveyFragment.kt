@@ -23,24 +23,24 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.dfu_app.databinding.FragmentDailySurveyBinding
 import com.example.dfu_app.imageprocessor.ImagePreprocessing
+import com.example.dfu_app.model.PytorchPrediction
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.net.URL
+import java.io.InputStream
 import java.util.*
 
 
 class DailySurveyFragment: Fragment() {
-    val CAMERA_PERM_CODE = 101
+    private val CAMERA_PERM_CODE = 101
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
-    lateinit var currentPhotoPath: String
+    private lateinit var currentPhotoPath: String
     private var _binding: FragmentDailySurveyBinding? = null
-    lateinit var photoURI: Uri
-    lateinit var Path: String
+    private lateinit var photoURI: Uri
+    private lateinit var Path: String
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -71,7 +71,7 @@ class DailySurveyFragment: Fragment() {
         binding.apply {
             submitDailSurveyButton.setOnClickListener { submit() }
             cameraButton.setOnClickListener{askCameraPermissions()
-            retrieveButton.setOnClickListener{ retrieve()}
+            retrievedButton.setOnClickListener{ retrieve()}
             }
         }
     }
@@ -79,7 +79,7 @@ class DailySurveyFragment: Fragment() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)
         {
             ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), CAMERA_PERM_CODE)
-            Log.e(TAG, "askCameraPermissions: ", )
+            Log.e(TAG, "askCameraPermissions: " )
         } else {
             openCamera()
         }
@@ -111,13 +111,59 @@ class DailySurveyFragment: Fragment() {
         resultLauncher.launch(intent)
         }
     private fun submit(){
-        binding.footImage.setImageDrawable(null)
-//        val action = DailySurveyFragmentDirections.actionNavDailySurveyToNavAnalysisRecord()
-//        this.findNavController().navigate(action)
+        //binding.footImage.setImageDrawable(null)
+        val action = DailySurveyFragmentDirections.actionNavDailySurveyToNavAnalysisRecord()
+        this.findNavController().navigate(action)
     }
     private fun retrieve(){
-        val map = ImagePreprocessing.loadingImg( Path )
-        binding.footImage.setImageBitmap(ImagePreprocessing.loadingImg( Path ))
-        map.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(Path));
+        val bitmap = ImagePreprocessing.loadingImg( Path )
+        try{
+            val pytorchModel = PytorchPrediction(requireContext().assets)
+            val predictBitmap = pytorchModel.modelPredict(bitmap)
+            binding.footImage.setImageBitmap(predictBitmap)
+            predictBitmap.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(Path))
+        }
+        catch( e: IOException ){
+
+        }
+
+        //val pytorchModel = PytorchPrediction(requireContext().assets)
+        //val predictBitmap = pytorchModel.modelPredict(bitmap)
+        //binding.footImage.setImageBitmap(predictBitmap)
+//        val rect = Rect(0,0,400,400)
+//        val rest = com.example.dfu_app.imageprocessor.Result(0,0.0f,rect)
+//        val testRest = listOf(rest)
+//        val predictBitmap = DrawBoundingBox(bitmap,testRest)
+//        binding.footImage.setImageBitmap(predictBitmap)
+//        predictBitmap.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(path));
     }
+    /*
+    fun assetFilePath(context: Context, asset: String): String {
+        val file = File(context.filesDir, asset)
+
+        try {
+            val inpStream: InputStream = context.assets.open(asset)
+            try {
+                val outStream = FileOutputStream(file, false)
+                val buffer = ByteArray(4 * 1024)
+                var read: Int
+
+                while (true) {
+                    read = inpStream.read(buffer)
+                    if (read == -1) {
+                        break
+                    }
+                    outStream.write(buffer, 0, read)
+                }
+                outStream.flush()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            return file.absolutePath
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return ""
+    }
+    */
 }

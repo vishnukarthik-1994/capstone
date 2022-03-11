@@ -8,8 +8,8 @@ class RecommendationSource() {
         return listOf<Recommendation>(
             Recommendation(R.string.recommendation1),
             Recommendation(R.string.recommendation2),
-            Recommendation(R.string.recommendation3),
-            Recommendation(R.string.recommendation4),
+            //Recommendation(R.string.recommendation3),
+            //Recommendation(R.string.recommendation4),
         )
     }
 }
