@@ -6,12 +6,12 @@ import android.graphics.*
 data class Result(val classIndex: Int,val score: Float,val rect:Rect){}
 object ImagePreprocessing {
     lateinit var absolutePath: String
-    private const val INPUT_WIDTH = 640
-    private const val INPUT_HEIGHT = 640
+    const val INPUT_WIDTH = 640
+    const val INPUT_HEIGHT = 640
     private const val TEXT_WIDTH = 260
     private const val TEXT_HEIGHT = 10
     const val OUTPUT_COLUMN = 6
-    lateinit var mclass: List<String>
+    private val classes = listOf("BOth","Infection","Ischamia","None")
     val NO_MEAN_RGB = floatArrayOf(0.0f, 0.0f, 0.0f)
     val NO_STD_RGB = floatArrayOf(1.0f, 1.0f, 1.0f)
     fun loadingImg(path: String): Bitmap {
@@ -32,7 +32,7 @@ object ImagePreprocessing {
         }
         return predictions.toList()
     }
-    fun DrawBoundingBox(bitmap:Bitmap,res:List<Result>):Bitmap{
+    fun drawBoundingBox(bitmap:Bitmap,res:List<Result>):Bitmap{
         val canvas = Canvas(bitmap)
         val mPaintRectangle = Paint()
         val mPaintText = Paint()
@@ -56,7 +56,7 @@ object ImagePreprocessing {
             mPaintText.textSize = 32f
             canvas.drawText(
                 java.lang.String.format(
-                    "%s %.2f", "Ulcer",
+                    "%s %.2f", classes[classIndex],
                     score
                 ),
                 rect.left.toFloat(),

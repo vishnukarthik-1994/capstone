@@ -10,7 +10,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_daily_survey">Daily Survey</string>
     <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_register">Register Form</string>
+    <string name="menu_register">Sign up</string>
     <string name="menu_diagnostic_record">Diagnostic Record</string>
     <string name="menu_login">Login</string>
     <!--Daily Survey String -->
@@ -21,7 +21,7 @@
     <string name="feeling_no_feeling">No feelings</string>
     <string name="feeling_burning">Burning</string>
     <string name="feeling_dull">Dull</string>
-    <string name="summit">Submit</string>
+    <string name="submit">Submit</string>
     <!--Welcome View String -->
     <string name="welcome_dfu_assistant">Welcome to the DFU Assistant</string>
     <string name="daily_dfu_check">Daily Medical Check</string>
@@ -30,16 +30,20 @@
     <!--Register View String -->
     <string name="firstname">First Name</string>
     <string name="lastname">Last Name</string>
-    <string name="user_name">Username</string>
+    <string name="accountName">Account Name</string>
     <string name="password">Password</string>
     <string name="weight">Weight</string>
     <string name="lb">lb</string>
     <string name="height">Height</string>
     <string name="feet">Feet</string>
+    <string name="year">Year</string>
     <string name="age">Age</string>
     <string name="confirm">Confirm</string>
-    <string name="register_create_slogan">Create your DFU Assistant Account</string>
-    <string name="register_personal_info_slogan">Personal Information</string>
+    <string name="nextStep">Next Step</string>
+    <string name="haveAccount">Have Account?</string>
+    <string name="sloganWhatYourName">What\'s your name?</string>
+    <string name="sloganSetPassword">Set your password</string>
+    <string name="sloganPersonalInfo">Personal Information</string>
     <string name="show_password">Show password</string>
     <!--Record View String -->
     <string name="diagnosis_result">Diagnosis Result</string>
@@ -50,9 +54,10 @@
     <string name="recommendation3">Quitting smoking</string>
     <string name="recommendation4">Exercising regularly and eating a well-balanced diabetic diet.</string>
     <!--Login View String -->
-    <string name="register">Register</string>
+    <string name="register">Sign up</string>
     <string name="login">Sign in </string>
     <!--Error message  String -->
+    <string name = "emptyInput"> Empty Input</string>
     <string name = "password_mismatch"> Those passwords don’t match. Try again.</string>
     <string name = "account_exist"> The account existed. Try again.</string>
     <string name = "login_fail"> Your login credentials don\'t match an account in our system</string>

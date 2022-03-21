@@ -1,21 +1,24 @@
 package com.example.dfu_app.ui.login
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.dfu_app.R
 import com.example.dfu_app.databinding.FragmentLoginBinding
-import com.example.dfu_app.ui.error_message.ErrorMessage
+import com.example.dfu_app.ui.error_message.ErrorMessage.setErrorMessage
 import com.example.dfu_app.ui.register.RegisterApplication
 import com.example.dfu_app.ui.register.RegisterViewModel
 import com.example.dfu_app.ui.register.RegisterViewModelFactory
 
 class LoginFragment: Fragment() {
-    private val errorMessage = ErrorMessage()
     private var _binding: FragmentLoginBinding? = null
     private val viewModel: RegisterViewModel by activityViewModels {
         RegisterViewModelFactory(
@@ -42,16 +45,26 @@ class LoginFragment: Fragment() {
         super.onDestroyView()
         _binding = null
     }
+    @SuppressLint("ClickableViewAccessibility")
     private fun bind( ) {
         binding.apply {
             registerButton.setOnClickListener { registered() }
             signInButton.setOnClickListener{ login() }
+            requireView().setOnTouchListener { _, event ->
+                if (event.action == MotionEvent.ACTION_DOWN) {
+                    if (requireActivity().currentFocus != null && requireActivity().currentFocus!!.windowToken != null) {
+                        closeKeyBoards()
+                    }
+                }
+                false
+            }
         }
     }
     private fun login(){
         if (viewModel.checkLogin(binding.userNameEditText.text.toString(),
                 binding.passwordEditText.text.toString()))
         {
+            closeKeyBoards()
             val action = LoginFragmentDirections.actionNavLoginToNavHome()
             this.findNavController().navigate(action)
             setErrorLogin(false)
@@ -66,7 +79,7 @@ class LoginFragment: Fragment() {
             binding.password.isErrorEnabled = true
             binding.userName.error = getString(R.string.login_fail)
             binding.password.error = getString(R.string.login_fail)
-            errorMessage.setErrorMessage(requireContext(),getString(R.string.login_fail))
+            setErrorMessage(requireContext(),getString(R.string.login_fail))
         } else {
             binding.userName.isErrorEnabled = false
             binding.password.isErrorEnabled = false
@@ -74,8 +87,15 @@ class LoginFragment: Fragment() {
         }
     }
     private fun registered(){
-        val action = LoginFragmentDirections.actionNavLoginToNavRegister()
+        val action = LoginFragmentDirections.actionNavLoginToNavRegisterUsername()
         this.findNavController().navigate(action)
+    }
+    private fun closeKeyBoards(){
+        val manager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        manager.hideSoftInputFromWindow(
+            requireActivity().currentFocus!!.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
+        )
     }
 }
 

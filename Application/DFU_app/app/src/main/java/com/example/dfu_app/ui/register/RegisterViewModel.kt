@@ -9,6 +9,13 @@ class RegisterViewModel(private val userInfoDao: UserInfoDao): ViewModel() {
     lateinit var allUserName: List<String>
     lateinit var allUserInfo: List<UserInfo>
     lateinit var userInfo: UserInfo
+    private lateinit var _accountName:String
+    private lateinit var _firstName:String
+    private lateinit var _lastName:String
+    private lateinit var _password: String
+    private var _height:Double = 0.0
+    private var _weight:Double = 0.0
+    private var _age:Int = 0
     private fun insertAccount(userInfo: UserInfo){
         viewModelScope.launch {
             userInfoDao.insert(userInfo)
@@ -35,37 +42,37 @@ class RegisterViewModel(private val userInfoDao: UserInfoDao): ViewModel() {
         }
         return false
     }
-    private fun getNewAccountEntry(userName: String, password: String, firstname: String,
-                                   lastname: String,weight: String, height: String, age: String): UserInfo
-    {
-        return UserInfo(
-            userName = userName,
-            password = password,
-            firstname = firstname,
-            lastname = lastname,
-            weight = weight.toDouble(),
-            height = height.toDouble(),
-            age = age.toInt()
-        )
-    }
     fun checkUserName(userName:String):Boolean{
         return allUserName.contains(userName)
     }
-    fun createAccount(userName: String, password: String, firstname: String,
-                      lastname: String,weight: String, height: String, age: String){
-        val account = getNewAccountEntry(userName,password,firstname,lastname,weight,height,age)
+    fun checkInput(source:String):Boolean{
+        return source.isNotBlank()
+    }
+    fun setName(firstname: String,lastname: String,accountName:String){
+        _firstName = firstname
+        _lastName = lastname
+        _accountName = accountName
+    }
+    fun setPassword(password: String){
+        _password = password
+    }
+    fun setInfo(height: String,weight: String,age: String){
+        _height = height.toDouble()
+        _weight = weight.toDouble()
+        _age = age.toInt()
+    }
+    fun createAccount(){
+        val account = UserInfo(
+            userName = _accountName,
+            password = _password,
+            firstname = _firstName,
+            lastname = _lastName,
+            weight = _weight,
+            height = _height,
+            age = _age
+        )
         insertAccount(account)
     }
-    fun isStringValid(userName: String, password: String, firstname: String,
-                      lastname: String,weight: String, height: String, age: String
-    ): Boolean {
-        if (userName.isBlank() || password.isBlank() || firstname.isBlank() || lastname.isBlank()
-            || weight.isBlank() || height.isBlank() || age.isBlank() ) {
-            return false
-        }
-        return true
-    }
-
 }
 class RegisterViewModelFactory(private val userInfoDao: UserInfoDao) : ViewModelProvider.Factory{
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

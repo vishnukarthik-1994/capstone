@@ -1,11 +1,14 @@
 package com.example.dfu_app
 
 import android.R.attr
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Environment
 import android.view.Menu
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity

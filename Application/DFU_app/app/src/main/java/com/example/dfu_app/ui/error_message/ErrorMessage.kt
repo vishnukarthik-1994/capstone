@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.Gravity
 import android.widget.Toast
 
-class ErrorMessage {
+object ErrorMessage {
     fun setErrorMessage(context: Context,Str: String){
         val duration  = Toast.LENGTH_SHORT
         val toast = Toast.makeText(context,Str,duration)

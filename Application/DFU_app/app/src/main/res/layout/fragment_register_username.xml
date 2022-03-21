@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+    <TextView
+        android:id="@+id/create_slogan_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:text="@string/sloganWhatYourName"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/first_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/firstname"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/create_slogan_text"
+        app:layout_constraintTop_toBottomOf="@id/create_slogan_text" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/first_name"
+        android:layout_width="160dp"
+        android:layout_height="45dp"
+        app:layout_constraintStart_toStartOf="@id/first_name_text"
+        app:layout_constraintTop_toBottomOf="@id/first_name_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/first_name_edit_text"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName|textNoSuggestions" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/last_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="@string/lastname"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@id/first_name"
+        app:layout_constraintTop_toTopOf="@id/first_name_text" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/last_name"
+        android:layout_width="160dp"
+        android:layout_height="45dp"
+        app:layout_constraintStart_toStartOf="@id/last_name_text"
+        app:layout_constraintTop_toBottomOf="@id/last_name_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/last_name_edit_text"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName|textNoSuggestions" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/account_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/accountName"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@id/first_name"
+        app:layout_constraintTop_toBottomOf="@id/first_name" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/account_name"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/account_name_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/account_name_edit_text"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName|textNoSuggestions" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/nextStep_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/nextStep"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/account_name"
+        app:layout_constraintTop_toBottomOf="@+id/account_name" />
+    <Button
+        android:id="@+id/return_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/haveAccount"
+        android:textColor="@color/purple_700"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/account_name"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

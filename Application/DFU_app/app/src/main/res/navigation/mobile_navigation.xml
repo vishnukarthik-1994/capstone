@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/nav_home">
+    app:startDestination="@id/nav_login">
 
     <fragment
         android:id="@+id/nav_home"
@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_nav_home_to_nav_daily_survey"
             app:destination="@id/nav_daily_survey" />
+        <action
+            android:id="@+id/action_nav_home_self"
+            app:destination="@id/nav_home" />
     </fragment>
 
     <fragment
@@ -27,15 +30,44 @@
             android:id="@+id/action_nav_daily_survey_to_nav_analysis_record"
             app:destination="@id/nav_analysis_record" />
     </fragment>
+    <!-- Register nav -->
     <fragment
-        android:id="@+id/nav_register"
-        android:name="com.example.dfu_app.ui.register.RegisterFragment"
-        android:label="@string/menu_register"
-        tools:layout="@layout/fragment_register" >
+        android:id="@+id/nav_register_username"
+        android:name="com.example.dfu_app.ui.register.RegisterNameFragment"
+        android:label="@string/menu_diagnostic_record"
+        tools:layout="@layout/fragment_register_username" >
         <action
-            android:id="@+id/action_nav_register_to_nav_home"
+            android:id="@+id/action_nav_register_username_to_nav_register_password"
+            app:destination="@id/nav_register_password" />
+        <action
+            android:id="@+id/action_nav_register_username_to_nav_login2"
+            app:destination="@id/nav_login" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_register_userinfo"
+        android:name="com.example.dfu_app.ui.register.RegisterUserInfoFragment"
+        android:label="@string/menu_diagnostic_record"
+        tools:layout="@layout/fragment_register_userinfo" >
+        <action
+            android:id="@+id/action_nav_register_userinfo_to_nav_login"
+            app:destination="@id/nav_login" />
+        <action
+            android:id="@+id/action_nav_register_userinfo_to_nav_home"
             app:destination="@id/nav_home" />
     </fragment>
+    <fragment
+        android:id="@+id/nav_register_password"
+        android:name="com.example.dfu_app.ui.register.RegisterPasswordFragment"
+        android:label="@string/menu_diagnostic_record"
+        tools:layout="@layout/fragment_register_password" >
+        <action
+            android:id="@+id/action_nav_register_password_to_nav_register_userinfo"
+            app:destination="@id/nav_register_userinfo" />
+        <action
+            android:id="@+id/action_nav_register_password_to_nav_login"
+            app:destination="@id/nav_login" />
+    </fragment>
+
     <fragment
         android:id="@+id/nav_analysis_record"
         android:name="com.example.dfu_app.ui.analysis_record.AnalysisRecordFragment"
@@ -50,7 +82,7 @@
             android:id="@+id/action_nav_login_to_nav_home"
             app:destination="@id/nav_home" />
         <action
-            android:id="@+id/action_nav_login_to_nav_register"
-            app:destination="@id/nav_register" />
+            android:id="@+id/action_nav_login_to_nav_register_username"
+            app:destination="@id/nav_register_username" />
     </fragment>
 </navigation>

@@ -2,11 +2,10 @@ package com.example.dfu_app.model
 
 import android.content.res.AssetManager
 import android.graphics.Bitmap
-import com.example.dfu_app.imageprocessor.ImagePreprocessing
-import com.example.dfu_app.imageprocessor.ImagePreprocessing.DrawBoundingBox
 import com.example.dfu_app.imageprocessor.ImagePreprocessing.NO_MEAN_RGB
 import com.example.dfu_app.imageprocessor.ImagePreprocessing.NO_STD_RGB
 import com.example.dfu_app.imageprocessor.ImagePreprocessing.OUTPUT_COLUMN
+import com.example.dfu_app.imageprocessor.ImagePreprocessing.drawBoundingBox
 import com.example.dfu_app.imageprocessor.ImagePreprocessing.outputsToPredictions
 import com.facebook.soloader.nativeloader.NativeLoader
 import com.facebook.soloader.nativeloader.SystemDelegate
@@ -24,7 +23,7 @@ class PytorchPrediction(assetManager: AssetManager) {
         NativeLoader.loadLibrary("pytorch_jni")
         NativeLoader.loadLibrary("torchvision_ops")
     }
-    private val modelName = "d2go.pt"
+    private val modelName = "dfumodel.pt"
     private var mModule:Module = PyTorchAndroid.loadModuleFromAsset(assetManager,modelName)
     fun modelPredict(img:Bitmap):Bitmap{
         var predictImg = img
@@ -58,7 +57,7 @@ class PytorchPrediction(assetManager: AssetManager) {
                 count++
             }
             val prediction = outputsToPredictions(count, outputs)
-            predictImg  = DrawBoundingBox(img, prediction)
+            predictImg  = drawBoundingBox(img, prediction)
         }
         return predictImg
     }
