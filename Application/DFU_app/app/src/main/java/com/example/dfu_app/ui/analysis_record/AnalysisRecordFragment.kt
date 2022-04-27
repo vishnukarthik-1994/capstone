@@ -1,29 +1,36 @@
 package com.example.dfu_app.ui.analysis_record
 
 import android.os.Bundle
-import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
-import com.example.dfu_app.R
+import androidx.navigation.findNavController
+import com.example.dfu_app.data.DiagnosisPhoto
 import com.example.dfu_app.data.RecommendationSource
-import com.example.dfu_app.databinding.AnalysisRecordListBinding
 import com.example.dfu_app.databinding.FragmentAnalysisRecordBinding
-import com.example.dfu_app.ui.home.HomeViewModel
-import java.io.File
+import com.example.dfu_app.ui.home.HomeFragmentDirections
 
 
 class AnalysisRecordFragment: Fragment() {
     private lateinit var viewModel: AnalysisRecordViewModel
+    private lateinit var adapter: AnalysisRecordAdapter
     private var _binding: FragmentAnalysisRecordBinding? = null
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //Set callback
+        val callback = object : OnBackPressedCallback(true /** true means that the callback is enabled */) {
+            override fun handleOnBackPressed() {
+                val action = AnalysisRecordFragmentDirections.actionNavAnalysisRecordToNavHome()
+                requireView().findNavController().navigate(action)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this,callback)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -31,14 +38,13 @@ class AnalysisRecordFragment: Fragment() {
     ): View? {
         val myDataset = RecommendationSource().loadRecommendations()
         _binding = FragmentAnalysisRecordBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this).get(AnalysisRecordViewModel::class.java)
-        val root: View = binding.root
-        binding.verticalRecyclerView.adapter = AnalysisRecordAdapter(this,viewModel.photos)
-        return root
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        viewModel = ViewModelProvider(this)[AnalysisRecordViewModel::class.java]
+        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
+        viewModel.update()
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
+        adapter = AnalysisRecordAdapter()
+        binding.verticalRecyclerView.adapter = AnalysisRecordAdapter()
+        return binding.root
     }
 }

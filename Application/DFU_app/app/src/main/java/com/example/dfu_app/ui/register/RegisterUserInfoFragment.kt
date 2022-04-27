@@ -2,6 +2,7 @@ package com.example.dfu_app.ui.register
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -10,7 +11,10 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.example.dfu_app.LoginActivity
+import com.example.dfu_app.MainActivity
 import com.example.dfu_app.R
 import com.example.dfu_app.databinding.FragmentRegisterUserinfoBinding
 import com.example.dfu_app.ui.error_message.ErrorMessage.setErrorMessage
@@ -19,8 +23,7 @@ import com.example.dfu_app.ui.error_message.ErrorMessage.setErrorMessage
 class RegisterUserInfoFragment: Fragment() {
 
     private val viewModel: RegisterViewModel by activityViewModels {
-        RegisterViewModelFactory(
-            (activity?.application as RegisterApplication).userInfoDatabase.userInfoDao())
+        RegisterViewModelFactory()
     }
     private var _binding: FragmentRegisterUserinfoBinding? = null
 
@@ -39,7 +42,6 @@ class RegisterUserInfoFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getUserName()
         bind()
     }
     override fun onDestroyView() {
@@ -99,21 +101,24 @@ class RegisterUserInfoFragment: Fragment() {
         viewModel.setInfo(binding.weightEditText.text.toString()
                         ,binding.weightEditText.text.toString()
                         ,binding.ageEditText.text.toString())
-        viewModel.createAccount()
+        viewModel.uploadUserToDp()
         closeKeyBoards()
-        val action = RegisterUserInfoFragmentDirections.actionNavRegisterUserinfoToNavHome()
-        this.findNavController().navigate(action)
+        val intent = Intent().setClass(requireActivity(), MainActivity::class.java)
+        startActivity(intent)
     }
     private fun back(){
         closeKeyBoards()
-        val action = RegisterUserInfoFragmentDirections.actionNavRegisterUserinfoToNavLogin()
-        this.findNavController().navigate(action)
+        val intent = Intent().setClass(requireActivity(), LoginActivity::class.java)
+        intent.putExtra("signOut",true)
+        startActivity(intent)
     }
     private fun closeKeyBoards(){
         val manager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        manager.hideSoftInputFromWindow(
-            requireActivity().currentFocus!!.windowToken,
-            InputMethodManager.HIDE_NOT_ALWAYS
-        )
+        if (manager.isActive){
+            manager.hideSoftInputFromWindow(
+                requireActivity().currentFocus!!.windowToken,
+                InputMethodManager.HIDE_NOT_ALWAYS
+            )
+        }
     }
 }

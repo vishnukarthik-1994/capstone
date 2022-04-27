@@ -25,7 +25,7 @@ class PytorchPrediction(assetManager: AssetManager) {
     }
     private val modelName = "dfumodel.pt"
     private var mModule:Module = PyTorchAndroid.loadModuleFromAsset(assetManager,modelName)
-    fun modelPredict(img:Bitmap):Bitmap{
+    fun modelPredict(img:Bitmap):Pair<Bitmap,Int> {
         var predictImg = img
         val floatBuffer = Tensor.allocateFloatBuffer(3 * img.width * img.height)
         //copy data to tensor  buffer
@@ -37,12 +37,12 @@ class PytorchPrediction(assetManager: AssetManager) {
         val outputTuple = mModule.forward(IValue.listFrom(inputTensor)).toTuple()
         // Decode model output
         val map = outputTuple[1].toList()[0].toDictStringKey()
+        var count = 0
         if (map.containsKey("boxes")){
             val boxesData = map["boxes"]!!.toTensor().dataAsFloatArray
             val scoresData = map["scores"]!!.toTensor().dataAsFloatArray
             val labelsData = map["labels"]!!.toTensor().dataAsLongArray
             val outputs =FloatArray(scoresData.size*OUTPUT_COLUMN)
-            var count = 0
             for ( i in scoresData.indices)
             {
                 // determining IOU > 0.5
@@ -59,6 +59,7 @@ class PytorchPrediction(assetManager: AssetManager) {
             val prediction = outputsToPredictions(count, outputs)
             predictImg  = drawBoundingBox(img, prediction)
         }
-        return predictImg
+        val string = "c"
+        return predictImg to count
     }
 }

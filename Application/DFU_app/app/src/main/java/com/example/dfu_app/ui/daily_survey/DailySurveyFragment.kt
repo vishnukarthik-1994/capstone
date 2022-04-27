@@ -20,6 +20,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,10 +29,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.dfu_app.R
 import com.example.dfu_app.databinding.FragmentDailySurveyBinding
 import com.example.dfu_app.imageprocessor.ImagePreprocessing
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.io.File
 import java.io.IOException
 import java.util.*
@@ -44,23 +50,36 @@ class DailySurveyFragment: Fragment() {
     private lateinit var currentPhotoPath: String
     private var _binding: FragmentDailySurveyBinding? = null
     private lateinit var photoURI: Uri
-    private lateinit var Path: String
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var timeStamp:String
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //Set callback
+        val callback = object : OnBackPressedCallback(true /** true means that the callback is enabled */) {
+            override fun handleOnBackPressed() {
+                val action = DailySurveyFragmentDirections.actionNavDailySurveyToNavHome()
+                requireView().findNavController().navigate(action)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this,callback)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        //remove previous view
+        container?.removeAllViews()
         _binding = FragmentDailySurveyBinding.inflate(inflater, container, false)
         ViewModelProvider(this)[DailySurveyViewModel::class.java].also { viewModel = it }
         viewModel.loadingModel(requireContext().assets)
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    binding.footImage.setImageBitmap(ImagePreprocessing.loadingImg( Path ))
-                    viewModel.prediction(ImagePreprocessing.loadingImg( Path ),Path)
+                    binding.footImage.setImageBitmap(ImagePreprocessing.loadingImg( currentPhotoPath ))
+                    viewModel.prediction(ImagePreprocessing.loadingImg( currentPhotoPath ),currentPhotoPath, timeStamp)
                 }
             }
         return binding.root
@@ -102,16 +121,14 @@ class DailySurveyFragment: Fragment() {
     @Throws(IOException::class)
     private fun createImageFile(): File {
         // Create an image file name
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val userEmail = Firebase.auth.currentUser!!.email!!
+        timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val storageDir: File = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)!!
-        return File.createTempFile(
-            "JPEG_${timeStamp}_", /* prefix */
-            ".png", /* suffix */
-            storageDir /* directory */
+        return File(
+            "${storageDir}/${userEmail}_${timeStamp}.png"
         ).apply {
             // Save a file: path for use with ACTION_VIEW intents
             currentPhotoPath = absolutePath
-            Path = absolutePath
         }
     }
     private fun openCamera() {
@@ -128,16 +145,17 @@ class DailySurveyFragment: Fragment() {
         resultLauncher.launch(intent)
         }
     private fun test(){
-        var testImage = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(resources, R.drawable.footulcer), ImagePreprocessing.INPUT_WIDTH, ImagePreprocessing.INPUT_HEIGHT, true)
-        val photoFile: File? = try {
+        val testImage = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(resources, R.drawable.footulcer), ImagePreprocessing.INPUT_WIDTH, ImagePreprocessing.INPUT_HEIGHT, true)
+        try {
             createImageFile()
         } catch (ex: IOException)
         {
-            null
+            Log.d(TAG, "Create Fail failed")
         }
-        binding.footImage.setImageBitmap(testImage)
-        viewModel.prediction(testImage,Path)
+        timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        viewModel.prediction(testImage,currentPhotoPath,timeStamp)
     }
+
     private fun submit(){
         val action = DailySurveyFragmentDirections.actionNavDailySurveyToNavAnalysisRecord()
         this.findNavController().navigate(action)

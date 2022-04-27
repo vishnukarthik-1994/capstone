@@ -6,10 +6,10 @@ buildscript {
         constraintlayout_version = '2.1.1'
         core_ktx_version = '1.6.0'
         coroutines_version = '1.4.2'
-        kotlin_version = '1.5.31'
+        kotlin_version = '1.6.10'
         lifecycle_version = '2.3.1'
         material_version = '1.4.0'
-        nav_version = '2.3.5'
+        nav_version = '2.4.1'
         room_version = '2.3.0'
         fbjniJavaOnlyVersion = "0.0.3"
         soLoaderNativeLoaderVersion = "0.8.0"
@@ -23,11 +23,11 @@ buildscript {
         classpath "com.android.tools.build:gradle:7.1.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath 'com.google.gms:google-services:4.3.10'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
-
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

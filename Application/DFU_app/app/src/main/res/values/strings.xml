@@ -13,6 +13,7 @@
     <string name="menu_register">Sign up</string>
     <string name="menu_diagnostic_record">Diagnostic Record</string>
     <string name="menu_login">Login</string>
+    <string name="menu_setting">Setting</string>
     <!--Daily Survey String -->
     <string name="take_picture">Take Picture</string>
     <string name="blood_pressure">Blood Pressure</string>
@@ -23,10 +24,11 @@
     <string name="feeling_dull">Dull</string>
     <string name="submit">Submit</string>
     <!--Welcome View String -->
-    <string name="welcome_dfu_assistant">Welcome to the DFU Assistant</string>
+    <string name="welcome_dfu_assistant">Hey there, \n Welcome to the DFU assistant,\n What can we help you today?</string>
     <string name="daily_dfu_check">Daily Medical Check</string>
     <string name="medical_record">Medical Record</string>
     <string name="more_info">DFU Information</string>
+    <string name="diagnosis_report">Diagnosis Report</string>
     <!--Register View String -->
     <string name="firstname">First Name</string>
     <string name="lastname">Last Name</string>
@@ -48,6 +50,7 @@
     <!--Record View String -->
     <string name="diagnosis_result">Diagnosis Result</string>
     <string name="medical_suggestion">Medical Suggestion</string>
+    <string name="no_record">No record</string>
     <!--Recommendation Source-->
     <string name="recommendation1">Avoiding soaking of the feet.</string>
     <string name="recommendation2">Having your shoes professionally fitted.</string>
@@ -56,9 +59,15 @@
     <!--Login View String -->
     <string name="register">Sign up</string>
     <string name="login">Sign in </string>
+    <!--Setting view -->
+    <string name="sign_out">Sign out</string>
+    <string name="remove_all_data">Remove all records</string>
+    <string name="user_info">User Information</string>
+    <string name="remove_all_slogan">Note!! If you click this button, all records will be cleared!!</string>
     <!--Error message  String -->
-    <string name = "emptyInput"> Empty Input</string>
-    <string name = "password_mismatch"> Those passwords don’t match. Try again.</string>
-    <string name = "account_exist"> The account existed. Try again.</string>
-    <string name = "login_fail"> Your login credentials don\'t match an account in our system</string>
+    <string name="emptyInput"> Empty Input</string>
+    <string name="password_mismatch"> Those passwords don’t match. Try again.</string>
+    <string name="account_exist"> The account existed. Try again.</string>
+    <string name="login_fail"> Your login credentials don\'t match an account in our system</string>
+    <string name="internet_unavailable"> Internet unavailable</string>
 </resources>

@@ -12,11 +12,11 @@
             android:id="@+id/nav_daily_survey"
             android:icon="@drawable/ic_menu_daily_survey"
             android:title="@string/menu_daily_survey" />
-
         <item
             android:id="@+id/nav_analysis_record"
             android:icon="@drawable/ic_menu_diagnostic_record"
             android:title="@string/menu_diagnostic_record" />
+
 
 
 

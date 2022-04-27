@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.analysis_record.AnalysisRecordFragment">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/vertical_recycler_view"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.dfu_app.ui.analysis_record.AnalysisRecordViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-</FrameLayout>
+        tools:context=".ui.analysis_record.AnalysisRecordFragment">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/vertical_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="1"
+            tools:listitem="@layout/analysis_record_list"
+            app:listData="@{viewModel.records}"/>
+        <ImageView
+            android:id="@+id/status_image"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="100dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:recordStatus="@{viewModel.status}" />
+        <TextView
+            android:id="@+id/no_record_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/no_record"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            app:textStatus="@{viewModel.status}"
+            app:layout_constraintStart_toStartOf="@+id/status_image"
+            app:layout_constraintTop_toBottomOf="@+id/status_image" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
