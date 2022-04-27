@@ -1,15 +1,8 @@
 package com.example.myreccomendation
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.graphics.Color
-import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.TextView
-import android.widget.Toast
-import com.example.myreccomendation.databinding.ActivityMainBinding
 import com.example.myreccomendation.databinding.ActivitySurveyBinding
 import kotlinx.android.synthetic.main.activity_survey.*
 import kotlin.collections.ArrayList
@@ -43,7 +36,7 @@ class Survey : AppCompatActivity(){
     private fun bing() {
         binding.apply {
             btn_submit.setOnClickListener {
-                check = when(choiseOptions.checkedRadioButtonId) {
+                check = when(choise_options.checkedRadioButtonId) {
                     R.id.option_no -> -1
                     R.id.option_yes -> 1
                     else ->0
@@ -51,10 +44,19 @@ class Survey : AppCompatActivity(){
                 if (check != 0) {
                     mChoices.add(check)
                     check = 0
-                    setQuestion()
+                    // check if the last question
+                    if (mCurrentPosition > 5)
+                    {
+                        setQuestion()
+                    }
+                    else {
+                        TODO()
+                        //generate the recommendation 
+                    }
                     mCurrentPosition += 1
-                    optionNo.isChecked = false
-                    optionYes.isChecked = false
+                    option_no.isChecked = false
+                    option_yes.isChecked = false
+                    choise_options.clearCheck()
                 }
             }
         }

@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "MyReccomendation"
-include ':app'
+include ':MyRec'
