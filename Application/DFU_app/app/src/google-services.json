@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "820018843059",
+    "project_id": "dfu-app-3964c",
+    "storage_bucket": "dfu-app-3964c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:820018843059:android:2d9f4635fb2f1797100fc6",
+        "android_client_info": {
+          "package_name": "com.example.dfu_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "820018843059-6d00lomrd4i9ngj07j5o850sosdbm6ot.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dfu_app",
+            "certificate_hash": "995871e2fc99a42659a2014b5fb406d2a45b9aff"
+          }
+        },
+        {
+          "client_id": "820018843059-lp9269ujfcmvvrah7tikuvkjlspnj7h7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhml6CrgBOZAIvCjtR0lJL57HA7J4TyCo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "820018843059-lp9269ujfcmvvrah7tikuvkjlspnj7h7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

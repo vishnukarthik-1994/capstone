@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="bottom_navigation">
+    <item
+        android:id="@+id/nav_analysis_record"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_daily_survey"
+        android:title="@string/menu_diagnostic_record"/>
+
+    <item
+        android:id="@+id/nav_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/menu_home" />
+
+    <item
+        android:id="@+id/nav_daily_survey"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_camera"
+        android:title="@string/menu_daily_survey"/>
+
+    <item
+        android:id="@+id/nav_setting"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/menu_setting"/>
+
+</menu>
