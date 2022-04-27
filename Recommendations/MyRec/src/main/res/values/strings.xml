@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MyRecommendation</string>
+    <string name="question_one">What is your type of ulcer?</string>
+    <string name="intro">This survey would help us understand your condition better and give appropriate suggestions</string>
+    <string name="greetings">Hello, Dear Patient</string>
+    <string name="test">this is testing</string>
+    <string name="title">Daily Survey</string>
+    <string name="finish_words">Thanks for your cooperation, Your report is generating(go back to report page)</string>
+    <string name="q0">What is your type of ulcer</string>
+    <string name="q1">Do you have acute onset of pain or increasing pain?</string>
+    <string name="q2">Does your wound probes to bone?</string>
+    <string name="q3">Has your gangrene develops or worsens in the past 14 days?</string>
+    <string name="q4">Previously palpable peripheral pulses are diminished or absent?</string>
+    <string name="q5">Has your systemic infection develops?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="sol_is">ischemia advice</string>
+    <string name="sol_in">infection advice</string>
+    <string name="sol_bo">both advice</string>
+    <string name="sol_no">none advice</string>
+    <string name="sol_da">call 911</string>
+</resources>
