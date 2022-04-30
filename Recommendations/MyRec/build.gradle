@@ -3,6 +3,10 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+task wrapper(type: Wrapper){
+    gradleVersion = '7.2'
+}
+
 android {
     compileSdk 32
 

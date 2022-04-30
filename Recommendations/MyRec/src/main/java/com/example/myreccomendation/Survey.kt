@@ -3,24 +3,26 @@ package com.example.myreccomendation
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.myreccomendation.databinding.ActivitySurveyBinding
 import kotlinx.android.synthetic.main.activity_survey.*
 import kotlin.collections.ArrayList
 
 class Survey : AppCompatActivity(){
-    private var mCurrentPosition: Int = 1
+    private var mCurrentPosition: Int = 2
     private var mQuestionList: ArrayList<Question>? = null
     private var mSelectedOptionPosition: Int = 0
     private var check = 0
     private val question: ArrayList<String> = arrayListOf<String>()
     private var mChoices: ArrayList<Int> = arrayListOf<Int>()
-    // private var recommendations: ArrayList<String> = arrayListOf<String>()
+    private var recommendations: ArrayList<ArrayList<String>> = arrayListOf<ArrayList<String>>()
     private lateinit var binding:ActivitySurveyBinding
     private lateinit var solution:Solutions
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getQuestion()
         setContentView(R.layout.activity_survey)
+        mChoices.add(1) // 1: ischemia; 2: infection; 3: Both; 4: Neither
         binding = ActivitySurveyBinding.inflate(layoutInflater)
         mQuestionList = Constants.getQuestions()
         solution = Solutions(applicationContext)
@@ -45,13 +47,14 @@ class Survey : AppCompatActivity(){
                     mChoices.add(check)
                     check = 0
                     // check if the last question
-                    if (mCurrentPosition > 5)
+                    if (mCurrentPosition < 6)
                     {
                         setQuestion()
                     }
                     else {
-                        TODO()
-                        //generate the recommendation 
+                        recommendations = solution.getSolutions(mChoices)
+//                        Log.d(recommendations.toString())
+                        //generate the recommendation
                     }
                     mCurrentPosition += 1
                     option_no.isChecked = false
