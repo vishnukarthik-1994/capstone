@@ -21,7 +21,7 @@
             android:id="@+id/tv_question"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="What is your type of ulcer?(for now)"
+            android:text="@string/q1"
             android:textSize="22sp"/>
 
         <LinearLayout
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/progressBar"
                 android:indeterminate="false"
-                android:max="6"
+                android:max="5"
                 android:minHeight="50dp"
                 android:progress="0"
                 style="?android:attr/progressBarStyleHorizontal">
