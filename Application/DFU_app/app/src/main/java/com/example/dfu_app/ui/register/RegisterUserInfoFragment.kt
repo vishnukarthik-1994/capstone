@@ -11,13 +11,13 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import com.example.dfu_app.LoginActivity
 import com.example.dfu_app.MainActivity
 import com.example.dfu_app.R
 import com.example.dfu_app.databinding.FragmentRegisterUserinfoBinding
 import com.example.dfu_app.ui.error_message.ErrorMessage.setErrorMessage
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class RegisterUserInfoFragment: Fragment() {
@@ -104,6 +104,8 @@ class RegisterUserInfoFragment: Fragment() {
         viewModel.uploadUserToDp()
         closeKeyBoards()
         val intent = Intent().setClass(requireActivity(), MainActivity::class.java)
+        val user = Firebase.auth.currentUser!!.email!!
+        intent.putExtra("user",user)
         startActivity(intent)
     }
     private fun back(){

@@ -24,6 +24,7 @@
     <string name="feeling_dull">Dull</string>
     <string name="submit">Submit</string>
     <!--Welcome View String -->
+    <string name="hey">Hey</string>
     <string name="welcome_dfu_assistant">Hey there, \n Welcome to the DFU assistant,\n What can we help you today?</string>
     <string name="daily_dfu_check">Daily Medical Check</string>
     <string name="medical_record">Medical Record</string>

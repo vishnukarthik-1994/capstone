@@ -99,17 +99,18 @@ class HomeFragment : Fragment() {
                 //using milliseconds to avoid date calculation
                 listPair.add(Pair(milliSec,count.toFloat()))
             }
-
-            // sort all records by time
-            // if records not sorted, Line chart don't know how to plot data
-            listPair.sortBy { it.first }
-            //find the earliest date
-            timeStamp = listPair[0].first
-            for (i in listPair.indices) {
-                //changing data type to feet the Line chart data format
-                listRecords.add(Entry((listPair[i].first - timeStamp).toFloat(),listPair[i].second))
+            if (listPair.size != 0) {
+                // sort all records by time
+                // if records not sorted, Line chart don't know how to plot data
+                listPair.sortBy { it.first }
+                //find the earliest date
+                timeStamp = listPair[0].first
+                for (i in listPair.indices) {
+                    //changing data type to feet the Line chart data format
+                    listRecords.add(Entry((listPair[i].first - timeStamp).toFloat(),listPair[i].second))
+                }
+                setLineChartData(listRecords)
             }
-            setLineChartData(listRecords)
         }.addOnFailureListener{
             Log.d(ContentValues.TAG, "Get cloud storage Error")
         }

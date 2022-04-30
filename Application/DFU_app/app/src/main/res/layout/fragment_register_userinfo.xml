@@ -29,18 +29,21 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/weight"
-        android:hint="@string/lb"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:textCursorDrawable="@null"
         app:layout_constraintTop_toBottomOf="@id/weight_text">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/weight_edit_text"
             android:padding="12dp"
+            android:hint="@string/lb"
+            android:gravity="center|end"
+            android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal" />
@@ -58,7 +61,6 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/height"
-        android:hint="@string/feet"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
@@ -72,6 +74,9 @@
             android:padding="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/feet"
+            android:gravity="center|end"
+            android:textAlignment="center"
             android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,7 +91,6 @@
         app:layout_constraintTop_toBottomOf="@id/height" />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/age"
-        android:hint="@string/year"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
@@ -97,7 +101,10 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/age_edit_text"
+            android:hint="@string/year"
             android:padding="12dp"
+            android:gravity="center|end"
+            android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal" />
