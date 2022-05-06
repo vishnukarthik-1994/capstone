@@ -4,3 +4,17 @@ tmp/
 .vscode/
 ~*
 _.jpg:Zone.Identifier
+# idea project files
+.idea/
+.idea/.name
+*.iml
+*.ipr
+*.iws
+
+##Gradle-based build
+.gradle
+build/
+# generated files
+bin/
+out/
+gen/

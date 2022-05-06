@@ -32,12 +32,14 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var user:String
     private val navIntent = Intent()
     private var signOut = false
+    private var back:Boolean = false
     private var allUsers = mutableMapOf<String,Int>()
     override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-        if (currentUser != null){
+        back = intent.getBooleanExtra("back",false)
+        if (currentUser != null && !back){
             user = currentUser.email!!
             navIntent.setClass(this, MainActivity::class.java)
             //intent.setClass(this, SignUpActivity::class.java)

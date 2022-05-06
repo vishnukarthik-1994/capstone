@@ -11,7 +11,7 @@ object ImagePreprocessing {
     private const val TEXT_WIDTH = 260
     private const val TEXT_HEIGHT = 10
     const val OUTPUT_COLUMN = 6
-    private val classes = listOf("BOth","Infection","Ischemia","None")
+    val classes = listOf("Both","Infection","Ischemia","None")
     val NO_MEAN_RGB = floatArrayOf(0.0f, 0.0f, 0.0f)
     val NO_STD_RGB = floatArrayOf(1.0f, 1.0f, 1.0f)
     fun loadingImg(imgPath: String): Bitmap {

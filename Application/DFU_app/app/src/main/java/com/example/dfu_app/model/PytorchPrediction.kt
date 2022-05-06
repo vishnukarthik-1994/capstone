@@ -25,7 +25,7 @@ class PytorchPrediction(assetManager: AssetManager) {
     }
     private val modelName = "dfumodel.pt"
     private var mModule:Module = PyTorchAndroid.loadModuleFromAsset(assetManager,modelName)
-    fun modelPredict(img:Bitmap):Pair<Bitmap,Int> {
+    fun modelPredict(img:Bitmap):Pair<Bitmap,Array<Int>> {
         var predictImg = img
         val floatBuffer = Tensor.allocateFloatBuffer(3 * img.width * img.height)
         //copy data to tensor  buffer
@@ -38,6 +38,7 @@ class PytorchPrediction(assetManager: AssetManager) {
         // Decode model output
         val map = outputTuple[1].toList()[0].toDictStringKey()
         var count = 0
+        var ulcerCount = IntArray(4)
         if (map.containsKey("boxes")){
             val boxesData = map["boxes"]!!.toTensor().dataAsFloatArray
             val scoresData = map["scores"]!!.toTensor().dataAsFloatArray
@@ -55,11 +56,11 @@ class PytorchPrediction(assetManager: AssetManager) {
                 outputs[OUTPUT_COLUMN * count + 4] = scoresData[i]
                 outputs[OUTPUT_COLUMN * count + 5] = labelsData[i].toFloat() - 1
                 count++
+                ulcerCount[(labelsData[i].toFloat() - 1).toInt()] += 1
             }
             val prediction = outputsToPredictions(count, outputs)
             predictImg  = drawBoundingBox(img, prediction)
         }
-        val string = "c"
-        return predictImg to count
+        return predictImg to ulcerCount.toTypedArray()
     }
 }

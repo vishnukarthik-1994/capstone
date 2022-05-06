@@ -3,19 +3,16 @@ package com.example.myreccomendation
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.myreccomendation.databinding.ActivitySurveyBinding
 import kotlinx.android.synthetic.main.activity_survey.*
 import kotlin.collections.ArrayList
 
 class Survey : AppCompatActivity(){
     private var mCurrentPosition: Int = 2
-    private var mQuestionList: ArrayList<Question>? = null
-    private var mSelectedOptionPosition: Int = 0
     private var check = 0
-    private val question: ArrayList<String> = arrayListOf<String>()
-    private var mChoices: ArrayList<Int> = arrayListOf<Int>()
-    private var recommendations: ArrayList<ArrayList<String>> = arrayListOf<ArrayList<String>>()
+    private val question: ArrayList<String> = arrayListOf()
+    private var mChoices: ArrayList<Int> = arrayListOf()
+    private var recommendations: ArrayList<ArrayList<String>> = arrayListOf()
     private lateinit var binding:ActivitySurveyBinding
     private lateinit var solution:Solutions
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,9 +21,8 @@ class Survey : AppCompatActivity(){
         setContentView(R.layout.activity_survey)
         mChoices.add(1) // 1: ischemia; 2: infection; 3: Both; 4: Neither
         binding = ActivitySurveyBinding.inflate(layoutInflater)
-        mQuestionList = Constants.getQuestions()
-        solution = Solutions(applicationContext)
         bing()
+        solution = Solutions()
     }
     private fun getQuestion() {
         question.add(getString(R.string.q1))
@@ -68,7 +64,7 @@ class Survey : AppCompatActivity(){
 
     @SuppressLint("SetTextI18n")
     private fun setQuestion() {
-        val strQuestion = question!!.get(mCurrentPosition-1)
+        val strQuestion = question[mCurrentPosition-1]
 //        defaultOptionsView()
 
 //        if(mCurrentPosition == mQuestionList!!.size){

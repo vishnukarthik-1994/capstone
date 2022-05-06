@@ -14,6 +14,8 @@
     <string name="menu_diagnostic_record">Diagnostic Record</string>
     <string name="menu_login">Login</string>
     <string name="menu_setting">Setting</string>
+    <string name="menu_survey_start">Start</string>
+    <string name="menu_survey_question">Question</string>
     <!--Daily Survey String -->
     <string name="take_picture">Take Picture</string>
     <string name="blood_pressure">Blood Pressure</string>
@@ -22,14 +24,37 @@
     <string name="feeling_no_feeling">No feelings</string>
     <string name="feeling_burning">Burning</string>
     <string name="feeling_dull">Dull</string>
+    <string name="start">Start</string>
     <string name="submit">Submit</string>
+    <string name="next">Next</string>
+    <string name="progress">1/5</string>
+    <string name="question_one">What is your type of ulcer?</string>
+    <string name="intro">This survey would help us understand your condition better and give appropriate suggestions</string>
+    <string name="greetings">Hello, Dear Patient</string>
+    <string name="test">this is testing</string>
+    <string name="title">Daily Survey</string>
+    <string name="finish_words">Thanks for your cooperation, Your report is generating(go back to report page)</string>
+    <string name="q0">What is your type of ulcer</string>
+    <string name="q1">Do you have acute onset of pain or increasing pain?</string>
+    <string name="q2">Does your wound extend to the bone?</string>
+    <string name="q3">Has your gangrene developed or worsened in the past 14 days?</string>
+    <string name="q4">Previously palpable peripheral pulses are diminished or absent?</string>
+    <string name="q5">Has your systemic infection worsened?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="sol_is">ischemia advice</string>
+    <string name="sol_in">infection advice</string>
+    <string name="sol_bo">both advice</string>
+    <string name="sol_no">none advice</string>
+    <string name="sol_da">call 911</string>
     <!--Welcome View String -->
     <string name="hey">Hey</string>
-    <string name="welcome_dfu_assistant">Hey there, \n Welcome to the DFU assistant,\n What can we help you today?</string>
+    <string name="welcome_dfu_assistant">Hey there, \n Welcome to the Diabetic Foot Ulcer(DFU) assistant, \n What can we help you with today?</string>
     <string name="daily_dfu_check">Daily Medical Check</string>
     <string name="medical_record">Medical Record</string>
     <string name="more_info">DFU Information</string>
     <string name="diagnosis_report">Diagnosis Report</string>
+    <string name="review">View Records</string>
     <!--Register View String -->
     <string name="firstname">First Name</string>
     <string name="lastname">Last Name</string>
@@ -52,6 +77,9 @@
     <string name="diagnosis_result">Diagnosis Result</string>
     <string name="medical_suggestion">Medical Suggestion</string>
     <string name="no_record">No record</string>
+    <string name="ischemia">Ischemia</string>
+    <string name="infection">Infection</string>
+    <string name="Both">Both</string>
     <!--Recommendation Source-->
     <string name="recommendation1">Avoiding soaking of the feet.</string>
     <string name="recommendation2">Having your shoes professionally fitted.</string>

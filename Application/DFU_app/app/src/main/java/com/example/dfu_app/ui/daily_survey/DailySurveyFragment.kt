@@ -28,23 +28,21 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.dfu_app.R
 import com.example.dfu_app.databinding.FragmentDailySurveyBinding
 import com.example.dfu_app.imageprocessor.ImagePreprocessing
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import java.io.File
 import java.io.IOException
 import java.util.*
 
-
 class DailySurveyFragment: Fragment() {
-    private lateinit var viewModel: DailySurveyViewModel
+
+    private val shareViewModel: DailySurveyViewModel by activityViewModels()
     private val CAMERA_PERM_CODE = 101
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private lateinit var currentPhotoPath: String
@@ -59,7 +57,7 @@ class DailySurveyFragment: Fragment() {
         //Set callback
         val callback = object : OnBackPressedCallback(true /** true means that the callback is enabled */) {
             override fun handleOnBackPressed() {
-                val action = DailySurveyFragmentDirections.actionNavDailySurveyToNavHome()
+                val action = DailySurveyFragmentDirections.actionNavDailySurveyToNavDailySurveyStart()
                 requireView().findNavController().navigate(action)
             }
         }
@@ -73,13 +71,11 @@ class DailySurveyFragment: Fragment() {
         //remove previous view
         container?.removeAllViews()
         _binding = FragmentDailySurveyBinding.inflate(inflater, container, false)
-        ViewModelProvider(this)[DailySurveyViewModel::class.java].also { viewModel = it }
-        viewModel.loadingModel(requireContext().assets)
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     binding.footImage.setImageBitmap(ImagePreprocessing.loadingImg( currentPhotoPath ))
-                    viewModel.prediction(ImagePreprocessing.loadingImg( currentPhotoPath ),currentPhotoPath, timeStamp)
+                    shareViewModel.prediction(ImagePreprocessing.loadingImg( currentPhotoPath ),currentPhotoPath, timeStamp)
                 }
             }
         return binding.root
@@ -88,6 +84,7 @@ class DailySurveyFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bind()
+        shareViewModel.loadingModel(requireContext().assets)
     }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -96,9 +93,9 @@ class DailySurveyFragment: Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     private fun bind( ) {
         binding.apply {
-            submitDailSurveyButton.setOnClickListener { submit() }
+            submitDailSurveyButton.setOnClickListener { next() }
             cameraButton.setOnClickListener{ askCameraPermissions() }
-            testButton.setOnClickListener{ test() }
+//            testButton.setOnClickListener{ test() }
             requireView().setOnTouchListener { _, event ->
                 if (event.action == MotionEvent.ACTION_DOWN) {
                     if (requireActivity().currentFocus != null && requireActivity().currentFocus!!.windowToken != null) {
@@ -153,11 +150,11 @@ class DailySurveyFragment: Fragment() {
             Log.d(TAG, "Create Fail failed")
         }
         timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        viewModel.prediction(testImage,currentPhotoPath,timeStamp)
+        shareViewModel.prediction(testImage,currentPhotoPath,timeStamp)
     }
 
-    private fun submit(){
-        val action = DailySurveyFragmentDirections.actionNavDailySurveyToNavAnalysisRecord()
+    private fun next(){
+        val action = DailySurveyFragmentDirections.actionNavDailySurveyToNavDailySurveyQuestionnaire()
         this.findNavController().navigate(action)
     }
     private fun closeKeyBoards(){

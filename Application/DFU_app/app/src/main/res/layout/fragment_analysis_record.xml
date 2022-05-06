@@ -8,34 +8,113 @@
             name="viewModel"
             type="com.example.dfu_app.ui.analysis_record.AnalysisRecordViewModel" />
     </data>
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.analysis_record.AnalysisRecordFragment">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/topPart">
+
+            <TextView
+                android:id="@+id/report_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/diagnosis_report"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/both_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/Both"
+                android:textColor="@color/grey"
+                android:background="@android:color/transparent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/report_text" />
+            <Button
+                android:id="@+id/ischemia_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/ischemia"
+                android:textColor="@color/grey"
+                android:background="@android:color/transparent"
+                app:layout_constraintStart_toEndOf="@+id/infection_button"
+                app:layout_constraintEnd_toStartOf="@+id/both_button"
+                app:layout_constraintTop_toBottomOf="@+id/report_text" />
+            <Button
+                android:id="@+id/infection_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:text="@string/infection"
+                android:textColor="@color/grey"
+                android:background="@android:color/transparent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/report_text" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/getTheGraph"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ischemia_button"
+                app:layout_constraintVertical_bias="0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/vertical_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical"
+            android:layout_height="wrap_content"
+            app:layout_constrainedHeight="true"
             android:clipToPadding="false"
+            android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topPart"
+            app:listData="@{viewModel.records}"
             app:spanCount="1"
-            tools:listitem="@layout/analysis_record_list"
-            app:listData="@{viewModel.records}"/>
+            tools:listitem="@layout/analysis_record_list" />
+
         <ImageView
             android:id="@+id/status_image"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/topPart"
             app:recordStatus="@{viewModel.status}" />
+
         <TextView
             android:id="@+id/no_record_text"
             android:layout_width="match_parent"
@@ -50,4 +129,5 @@
             app:layout_constraintStart_toStartOf="@+id/status_image"
             app:layout_constraintTop_toBottomOf="@+id/status_image" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

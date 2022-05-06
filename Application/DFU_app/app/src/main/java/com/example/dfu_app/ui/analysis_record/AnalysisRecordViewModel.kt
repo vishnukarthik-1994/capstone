@@ -11,6 +11,7 @@ import com.example.dfu_app.data.DiagnosisPhoto
 import com.example.dfu_app.imageprocessor.ImagePreprocessing
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
@@ -30,19 +31,25 @@ class AnalysisRecordViewModel: ViewModel(){
     // The external LiveData interface to the property is immutable, so only this class can modify
     private val _records  = MutableLiveData<MutableList<DiagnosisPhoto>>()
     var records: LiveData<MutableList<DiagnosisPhoto>> = _records
-
     fun update(){
         _records.value = mutableListOf()
         _status.value = false
         val localImages = getLocalFile()
         //read cloud file
         val user = users.document(userEmail).collection("record")
-        val updateList = mutableListOf<String>()
+        val updateList = mutableListOf<Pair<String,QueryDocumentSnapshot>>()
         user.get().addOnSuccessListener {documents ->
             for (doc in documents){
                 val cloudImg = doc.data["path"].toString()
                 if (cloudImg !in localImages){
-                    updateList.add(cloudImg)
+                    updateList.add(Pair(cloudImg,doc))
+                }
+                else {
+//                    val file = File("$absolutePath/$cloudImg")
+                    val record = DiagnosisPhoto(cloudImg,"$absolutePath/$cloudImg".toUri(),separateCount(doc),doc["suggestion"].toString())
+//                    val record = DiagnosisPhoto(cloudImg,file.toUri())
+                    _records.addNewItem(record)
+                    _status.value = true
                 }
             }
             //Record is previous version
@@ -53,10 +60,17 @@ class AnalysisRecordViewModel: ViewModel(){
             Log.d(ContentValues.TAG, "Get cloud storage Error")
         }
     }
-
-    private fun getLocalFile(): MutableMap<String, Int>{
+    private fun separateCount(doc: QueryDocumentSnapshot): HashMap<String, String> {
+        return hashMapOf(
+            "Both" to doc["Both"].toString(),
+            "Infection" to doc["Infection"].toString(),
+            "Ischemia" to doc["Ischemia"].toString(),
+            "None" to doc["None"].toString()
+        )
+    }
+    private fun getLocalFile(): MutableSet<String>{
         val dir  = File(absolutePath)
-        val localImages = mutableMapOf<String,Int>()
+        val localImages = mutableSetOf<String>()
         val files = dir.listFiles()!!
         //read all local files
         for (file in files){
@@ -64,29 +78,28 @@ class AnalysisRecordViewModel: ViewModel(){
                 val fileName = file.absolutePath.toString().split("/").last()
                 val nameUser = fileName.split("_").first()
                 if (nameUser == userEmail){
-                    localImages[fileName] = 1
-                    val record = DiagnosisPhoto(fileName,file.toUri())
-                    _records.addNewItem(record)
-                    _status.value = true
+                    localImages.add(fileName)
+//                    val record = DiagnosisPhoto(fileName,file.toUri())
+//                    _records.addNewItem(record)
+//                    _status.value = true
                 }
             }
         }
         return localImages
     }
 
-    private fun downLoad(toDoList:List<String>){
-        for (cloudImg in toDoList ){
-            val fileName = cloudImg.split(".png").first()
+    private fun downLoad(toDoList:List<Pair<String,QueryDocumentSnapshot>>){
+        for ((cloudImg,doc) in toDoList ){
             val file = File("$absolutePath/$cloudImg")
             val imageRef = storage.reference.child("$userEmail/$cloudImg")
             imageRef.getFile(file).addOnSuccessListener {
-                val record = DiagnosisPhoto(fileName,file.toUri())
+                val record = DiagnosisPhoto(cloudImg,"$absolutePath/$cloudImg".toUri(),separateCount(doc),doc["suggestion"].toString())
                 _records.addNewItem(record)
                 _status.value = true
+                Log.d(ContentValues.TAG, "Download Images Successful")
             }.addOnFailureListener{
                 Log.d(ContentValues.TAG, "Download Images Error")
             }
-            val text = _records
         }
     }
     private fun checkImg(imgPath:String):Boolean{

@@ -9,7 +9,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#DDD1D0</color>
+    <color name="grey_bark">#DCC9C7</color>
     <color name="grey_background">#DADADA</color>
     <color name="darkBlue">#091242</color>
     <color name="lightBlue">#0470C5</color>
+    <color name="gold">#FAF2AF</color>
+    <color name="blue_background">#05277A</color>
+    <color name="blue_content">#1AA8F5</color>
 </resources>

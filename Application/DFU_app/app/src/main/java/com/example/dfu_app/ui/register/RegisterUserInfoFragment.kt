@@ -104,8 +104,7 @@ class RegisterUserInfoFragment: Fragment() {
         viewModel.uploadUserToDp()
         closeKeyBoards()
         val intent = Intent().setClass(requireActivity(), MainActivity::class.java)
-        val user = Firebase.auth.currentUser!!.email!!
-        intent.putExtra("user",user)
+        intent.putExtra("back",true)
         startActivity(intent)
     }
     private fun back(){

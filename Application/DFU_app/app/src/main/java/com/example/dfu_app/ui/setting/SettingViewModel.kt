@@ -35,7 +35,7 @@ class SettingViewModel: ViewModel() {
         for (record in recordName) {
             //remove records in cloud db
             users.document(_user).collection("record").document(record).delete()
-            //remove records in cloud local file
+            //remove records in cloud storage
             val protectString = "_"
             val fileRef = storage.reference.child("$_user/$_user$protectString$record.png")
             fileRef.delete().addOnSuccessListener {
@@ -43,7 +43,7 @@ class SettingViewModel: ViewModel() {
             }.addOnFailureListener {
                 Log.d(ContentValues.TAG, "Remove cloud $fileRef failed")
             }
-            //remove records in cloud storage
+            //remove records in cloud local file
             val path = Path("$absolutePath/$_user$protectString$record.png")
             try {
                 if (Files.deleteIfExists(path)) {

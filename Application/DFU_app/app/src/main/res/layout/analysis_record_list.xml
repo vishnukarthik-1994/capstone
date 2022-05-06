@@ -13,10 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardElevation="4dp"
-        app:cardCornerRadius="4dp">
+        app:cardCornerRadius="20dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -26,35 +27,53 @@
                     android:layout_height="312dp"
                     android:id="@+id/record_image"
                     app:imageUri="@{photo.uri}"
+                    android:scaleType="fitXY"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
                     tools:src="@drawable/footprint"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="serif"
                     android:text="@string/diagnosis_result"
-                    app:layout_constraintTop_toBottomOf="@id/record_image"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintTop_toBottomOf="@id/record_image" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginStart="8dp"
-                    android:text="@string/diagnosis_result" />
+                    android:text="@{photo.predict.toString().substring(1,photo.predict.toString().length()-1)}"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textSize="16sp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="serif"
                     android:text="@string/medical_suggestion"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:typeface="normal" />
+
                 <TextView
+                    android:id="@+id/recommendation_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/recommendation_text"
-                    android:layout_marginTop="16dp"
                     android:layout_marginStart="8dp"
-                    android:text="@string/diagnosis_result" />
+                    android:layout_marginTop="16dp"
+                    android:text="@{photo.recommendation}"
+                    android:textAppearance="?attr/textAppearanceHeadline6"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 

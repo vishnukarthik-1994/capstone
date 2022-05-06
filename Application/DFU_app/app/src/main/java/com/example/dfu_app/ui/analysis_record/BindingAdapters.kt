@@ -18,7 +18,9 @@ import com.example.dfu_app.data.DiagnosisPhoto
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<DiagnosisPhoto>?) {
     val adapter = recyclerView.adapter as AnalysisRecordAdapter
-    adapter.submitList(data)
+    if (data!!.isNotEmpty()) {
+        adapter.submitList(data)
+    }
 }
 
 /**

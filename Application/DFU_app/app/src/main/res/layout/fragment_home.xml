@@ -12,9 +12,9 @@
         android:id="@+id/welcome_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="100dp"
         android:text="@string/welcome_dfu_assistant"
-        android:textSize="27sp"
+        android:textSize="26sp"
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="@color/white"
@@ -23,46 +23,38 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textAppearance="?attr/textAppearanceHeadline6"/>
-
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/dail_survey_button"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/diagnosis_report"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:layout_marginTop="35dp"
-        android:layout_marginStart="10dp"
-        android:textAppearance="?attr/textAppearanceHeadline6"
-        app:layout_constraintStart_toStartOf="@+id/getTheGraph"
-        app:layout_constraintBottom_toTopOf= "@+id/getTheGraph"
-        />
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/getTheGraph"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="125dp"
+        android:layout_marginEnd="30dp"
+        android:text="@string/menu_daily_survey"
+        android:outlineProvider="bounds"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@android:color/transparent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf= "@+id/foot_image" />
+        app:layout_constraintTop_toBottomOf="@+id/welcome_text" />
+    <Button
+        android:id="@+id/record_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:outlineProvider="bounds"
+        android:text="@string/review"
+        android:background="@android:color/transparent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dail_survey_button" />
     <ImageView
-        android:id="@+id/foot_image"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="320dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+
         app:srcCompat="@drawable/novo_nordisk" />
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

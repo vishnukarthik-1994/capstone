@@ -9,13 +9,17 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.dfu_app.LoginActivity
 import com.example.dfu_app.R
+import com.example.dfu_app.SignUpActivity
 import com.example.dfu_app.databinding.FragmentRegisterUsernameBinding
+import com.example.dfu_app.ui.daily_survey.DailySurveyFragmentDirections
 import com.example.dfu_app.ui.error_message.ErrorMessage.setErrorMessage
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -30,6 +34,19 @@ class RegisterNameFragment: Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //Set callback
+        val callback = object : OnBackPressedCallback(true /** true means that the callback is enabled */) {
+            override fun handleOnBackPressed() {
+                val navIntent = Intent()
+                navIntent.setClass(requireActivity(), LoginActivity::class.java)
+                navIntent.putExtra("back",true)
+                startActivity(navIntent)
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this,callback)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -13,21 +13,21 @@
         <action
             android:id="@+id/action_nav_home_to_nav_analysis_record"
             app:destination="@id/nav_analysis_record"
-            app:popUpTo="@+id/nav_analysis_record"
-            app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_nav_home_to_nav_daily_survey"
-            app:destination="@id/nav_daily_survey"
-            app:popUpTo="@+id/nav_daily_survey"
+            app:popUpTo="@+id/nav_home"
             app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_nav_home_to_nav_analysis_record2"
             app:destination="@id/nav_analysis_record"
-            app:popUpTo="@+id/nav_analysis_record"
+            app:popUpTo="@+id/nav_home"
             app:popUpToInclusive="true"/>
         <action
             android:id="@+id/action_nav_home_self"
             app:destination="@id/nav_home"
+            app:popUpTo="@+id/nav_home"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_nav_home_to_nav_daily_survey_start"
+            app:destination="@id/nav_daily_survey_start"
             app:popUpTo="@+id/nav_home"
             app:popUpToInclusive="true"/>
     </fragment>
@@ -38,15 +38,38 @@
         android:label="@string/menu_daily_survey"
         tools:layout="@layout/fragment_daily_survey" >
         <action
-            android:id="@+id/action_nav_daily_survey_to_nav_analysis_record"
-            app:destination="@id/nav_analysis_record"
-            app:popUpTo="@+id/nav_daily_survey"
+            android:id="@+id/action_nav_daily_survey_to_nav_daily_survey_questionnaire"
+            app:destination="@id/nav_daily_survey_questionnaire" />
+        <action
+            android:id="@+id/action_nav_daily_survey_to_nav_daily_survey_start"
+            app:destination="@id/nav_daily_survey_start" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_daily_survey_questionnaire"
+        android:name="com.example.dfu_app.ui.daily_survey.SurveyQuestionnaireFragment"
+        android:label="@string/menu_survey_question"
+        tools:layout="@layout/fragment_survey_questionnaire" >
+        <action
+            android:id="@+id/action_nav_daily_survey_questionnaire_to_nav_daily_survey_start"
+            app:destination="@id/nav_daily_survey_start"
+            app:popUpTo="@+id/nav_daily_survey_questionnaire"
             app:popUpToInclusive="true"/>
         <action
-            android:id="@+id/action_nav_daily_survey_to_nav_home"
-            app:destination="@id/nav_home"
-            app:popUpTo="@+id/nav_daily_survey"
+            android:id="@+id/action_nav_daily_survey_questionnaire_to_nav_analysis_record"
+            app:destination="@id/nav_analysis_record"
+            app:popUpTo="@+id/nav_daily_survey_questionnaire"
             app:popUpToInclusive="true"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_daily_survey_start"
+        android:name="com.example.dfu_app.ui.daily_survey.SurveyStartFragment"
+        android:label="@string/menu_survey_start"
+        tools:layout="@layout/fragment_survey_start" >
+        <action
+            android:id="@+id/action_nav_daily_survey_start_to_nav_daily_survey"
+            app:destination="@id/nav_daily_survey" />
     </fragment>
 
     <fragment
