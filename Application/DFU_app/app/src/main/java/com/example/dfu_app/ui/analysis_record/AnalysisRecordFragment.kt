@@ -77,23 +77,26 @@ class AnalysisRecordFragment: Fragment() {
     private fun bind( ) {
         binding.apply {
             infectionButton.setOnClickListener {
-                infectionButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.darkBlue))
-                bothButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.grey))
-                ischemiaButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.grey))
+                infectionButton.textSize = 16f
+                bothButton.textSize = 14f
+                ischemiaButton.textSize = 14f
+//                infectionButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.darkBlue))
+//                bothButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.grey))
+//                ischemiaButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.grey))
                 ulcerType = 1
                 drawRecords()
             }
             ischemiaButton.setOnClickListener {
-                infectionButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.grey))
-                bothButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.grey))
-                ischemiaButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.darkBlue))
+                infectionButton.textSize = 14f
+                bothButton.textSize = 14f
+                ischemiaButton.textSize = 16f
                 ulcerType = 2
                 drawRecords()
             }
             bothButton.setOnClickListener {
-                infectionButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.grey))
-                bothButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.darkBlue))
-                ischemiaButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.grey))
+                infectionButton.textSize = 14f
+                bothButton.textSize = 16f
+                ischemiaButton.textSize = 14f
                 ulcerType = 3
                 drawRecords()
             }

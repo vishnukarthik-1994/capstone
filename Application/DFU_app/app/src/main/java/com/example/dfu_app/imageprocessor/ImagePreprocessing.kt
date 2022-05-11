@@ -6,8 +6,8 @@ import android.graphics.*
 data class Result(val classIndex: Int,val score: Float,val rect:Rect){}
 object ImagePreprocessing {
     lateinit var absolutePath: String
-    const val INPUT_WIDTH = 640
-    const val INPUT_HEIGHT = 640
+    const val INPUT_WIDTH = 416
+    const val INPUT_HEIGHT = 416
     private const val TEXT_WIDTH = 260
     private const val TEXT_HEIGHT = 10
     const val OUTPUT_COLUMN = 6

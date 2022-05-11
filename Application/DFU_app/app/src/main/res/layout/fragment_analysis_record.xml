@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".ui.analysis_record.AnalysisRecordFragment">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -24,7 +24,7 @@
                 android:id="@+id/report_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:text="@string/diagnosis_report"
                 android:textAppearance="?attr/textAppearanceHeadline6"
@@ -35,6 +35,16 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/both_button"
+                app:layout_constraintBottom_toBottomOf="@+id/both_button"
+                android:background="@drawable/button_shape" />
             <Button
                 android:id="@+id/both_button"
                 android:layout_width="0dp"
@@ -42,7 +52,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:text="@string/Both"
-                android:textColor="@color/grey"
+                android:textColor="@color/blue_background"
                 android:background="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/report_text" />
@@ -54,7 +64,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:text="@string/ischemia"
-                android:textColor="@color/grey"
+                android:textColor="@color/blue_background"
                 android:background="@android:color/transparent"
                 app:layout_constraintStart_toEndOf="@+id/infection_button"
                 app:layout_constraintEnd_toStartOf="@+id/both_button"
@@ -66,7 +76,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="20dp"
                 android:text="@string/infection"
-                android:textColor="@color/grey"
+                android:textColor="@color/blue_background"
                 android:background="@android:color/transparent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/report_text" />
