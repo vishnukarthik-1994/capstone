@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import com.example.dfu_app.databinding.FragmentSurveyStartBinding
 
 class SurveyStartFragment: Fragment() {
-    private lateinit var viewModel: DailySurveyViewModel
+    private lateinit var viewModel: SurveyViewModel
     private var _binding: FragmentSurveyStartBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,7 +23,7 @@ class SurveyStartFragment: Fragment() {
     ): View? {
         //remove previous view
         container?.removeAllViews()
-        ViewModelProvider(this)[DailySurveyViewModel::class.java].also { viewModel = it }
+        ViewModelProvider(this)[SurveyViewModel::class.java].also { viewModel = it }
         _binding = FragmentSurveyStartBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -35,7 +35,7 @@ class SurveyStartFragment: Fragment() {
     private fun bind( ) {
         binding.apply {
                 btnStart.setOnClickListener {
-                    val action = SurveyStartFragmentDirections.actionNavDailySurveyStartToNavDailySurvey()
+                    val action = SurveyStartFragmentDirections.actionNavSurveyStartToNavSurveyImageAnalysis()
                     requireView().findNavController().navigate(action)
                 }
             }

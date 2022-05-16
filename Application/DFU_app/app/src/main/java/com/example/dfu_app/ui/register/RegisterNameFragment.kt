@@ -12,14 +12,10 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.dfu_app.LoginActivity
 import com.example.dfu_app.R
-import com.example.dfu_app.SignUpActivity
 import com.example.dfu_app.databinding.FragmentRegisterUsernameBinding
-import com.example.dfu_app.ui.daily_survey.DailySurveyFragmentDirections
 import com.example.dfu_app.ui.error_message.ErrorMessage.setErrorMessage
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

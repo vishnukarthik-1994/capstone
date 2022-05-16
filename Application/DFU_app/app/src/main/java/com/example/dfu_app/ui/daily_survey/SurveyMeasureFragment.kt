@@ -28,7 +28,7 @@ import java.io.IOException
 
 class SurveyMeasureFragment: Fragment() {
 
-    private val shareViewModel: DailySurveyViewModel by activityViewModels()
+    private val shareViewModel: SurveyViewModel by activityViewModels()
     private var _binding: FragmentSurveyMeasurementBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -39,16 +39,8 @@ class SurveyMeasureFragment: Fragment() {
     private val REQUEST_ENABLE_BLUETOOTH = 1
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //Set callback
-        val callback = object : OnBackPressedCallback(true /** true means that the callback is enabled */) {
-            override fun handleOnBackPressed() {
-                val action = DailySurveyFragmentDirections.actionNavDailySurveyToNavDailySurveyStart()
-                requireView().findNavController().navigate(action)
-            }
-        }
         bluetoothManager = (requireContext().getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager)
         bluetoothAdapter = bluetoothManager.adapter
-        requireActivity().onBackPressedDispatcher.addCallback(this,callback)
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
                 if (result.resultCode == Activity.RESULT_OK) {

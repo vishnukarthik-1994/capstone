@@ -7,14 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.dfu_app.R
 import com.example.dfu_app.data.Solutions
 import com.example.dfu_app.databinding.FragmentSurveyQuestionnaireBinding
 
 class SurveyQuestionnaireFragment:Fragment() {
-    private val shareViewModel: DailySurveyViewModel by activityViewModels()
+    private val shareViewModel: SurveyViewModel by activityViewModels()
     private var _binding: FragmentSurveyQuestionnaireBinding? = null
     private var mCurrentPosition: Int = 0
     private var check = 0
@@ -70,7 +69,7 @@ class SurveyQuestionnaireFragment:Fragment() {
         }
     }
     private fun navigate(){
-        val action = SurveyQuestionnaireFragmentDirections.actionNavDailySurveyQuestionnaireToNavAnalysisRecord()
+        val action = SurveyQuestionnaireFragmentDirections.actionNavSurveyQuestionnaireToNavAnalysisRecord()
         requireView().findNavController().navigate(action)
     }
     private fun getQuestion() {

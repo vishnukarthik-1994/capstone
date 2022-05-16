@@ -26,7 +26,12 @@
         <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/drawable/buttom_shape.xml" value="0.294" />
         <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/drawable/button_shape.xml" value="0.1665" />
         <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/drawable/color_background.xml" value="0.276" />
+        <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/drawable/ic_baseline_error_24.xml" value="0.1755" />
         <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.2465" />
+        <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/drawable/ic_baseline_monitor_heart_24.xml" value="0.132" />
+        <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/drawable/ic_baseline_people_24.xml" value="0.132" />
+        <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.132" />
+        <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.132" />
         <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/drawable/ic_broken_image.xml" value="0.2465" />
         <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/drawable/ic_connection_error.xml" value="0.2075" />
         <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2075" />
@@ -54,6 +59,7 @@
         <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/layout/fragment_register_username.xml" value="0.28611898016997167" />
         <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/layout/fragment_setting.xml" value="0.264" />
         <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/layout/fragment_sign_up.xml" value="0.3671875" />
+        <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/layout/fragment_survey_image_analysis.xml" value="0.2713541666666667" />
         <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/layout/fragment_survey_measurement.xml" value="0.346875" />
         <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/layout/fragment_survey_questionnaire.xml" value="0.346875" />
         <entry key="..\:/college_file/uw/EEP597/capstone/Application/DFU_app/app/src/main/res/layout/fragment_survey_start.xml" value="0.346875" />

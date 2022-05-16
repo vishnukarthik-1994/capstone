@@ -195,8 +195,10 @@ class AnalysisRecordFragment: Fragment() {
         binding.getTheGraph.xAxis.granularity = 1F
         binding.getTheGraph.xAxis.labelCount = sourceList.size
         binding.getTheGraph.extraBottomOffset = 20F
-        binding.getTheGraph.extraLeftOffset = 25F
-        binding.getTheGraph.extraRightOffset = 25F
+//        binding.getTheGraph.extraLeftOffset = 25F
+//        binding.getTheGraph.extraRightOffset = 25F
+        binding.getTheGraph.xAxis.setAvoidFirstLastClipping(true)
+        binding.getTheGraph.xAxis.setLabelCount(4,true)
         binding.getTheGraph.legend.textSize = 15F
         binding.getTheGraph.setBorderColor(ContextCompat.getColor(requireContext(), R.color.black))
         binding.getTheGraph.animateXY(2000, 2000, Easing.EaseInOutCubic)
