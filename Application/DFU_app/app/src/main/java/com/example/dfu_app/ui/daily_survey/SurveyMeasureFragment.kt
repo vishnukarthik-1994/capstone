@@ -65,7 +65,6 @@ class SurveyMeasureFragment: Fragment() {
         /*
         Create connection bluetooth to sensor
         * */
-        TODO()
         return binding.root
     }
 
@@ -80,7 +79,6 @@ class SurveyMeasureFragment: Fragment() {
             /*
             When measure start should receive data from arduino
             * */
-            TODO()
         }
     }
     //ask bluetooth permission
