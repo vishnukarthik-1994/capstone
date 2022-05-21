@@ -22,7 +22,7 @@ class PytorchPrediction(assetManager: AssetManager) {
         NativeLoader.loadLibrary("pytorch_jni")
         NativeLoader.loadLibrary("torchvision_ops")
     }
-    private val modelName = "best_v2.torchscript"
+    private val modelName = "best_class4.torchscript"
     private var mModule:Module = PyTorchAndroid.loadModuleFromAsset(assetManager,modelName)
     fun modelPredict(img:Bitmap):Pair<Bitmap,Array<Int>> {
         val floatBuffer = Tensor.allocateFloatBuffer(3 * img.width * img.height)

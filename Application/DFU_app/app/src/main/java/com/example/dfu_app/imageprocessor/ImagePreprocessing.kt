@@ -14,7 +14,7 @@ object ImagePreprocessing {
     const val INPUT_WIDTH = 416
     const val INPUT_HEIGHT = 416
     private const val mOutputRow = 10647 // as decided by the YOLOv5 model for input image of size 640*640
-    private const val mOutputColumn = 6 // left, top, right, bottom, score and 1 class probability
+    private const val mOutputColumn = 9 // left, top, right, bottom, score and 1 class probability
     private const val mThreshold = 0.30f // score above which a detection is generated
     private const val mNmsLimit = 15
     private val classes = listOf("Both","Infection","Ischemia","None")
@@ -118,7 +118,7 @@ object ImagePreprocessing {
     }
 
     // calculate the IOU score
-    fun IOU(a: Rect, b: Rect): Float {
+    private fun IOU(a: Rect, b: Rect): Float {
         val areaA = ((a.right - a.left) * (a.bottom - a.top)).toFloat()
         if (areaA <= 0.0) return 0.0f
         val areaB = ((b.right - b.left) * (b.bottom - b.top)).toFloat()

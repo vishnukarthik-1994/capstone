@@ -94,8 +94,8 @@ class SurveyImageAnalysisFragment: Fragment() {
     private fun bind( ) {
         binding.apply {
             submitDailSurveyButton.setOnClickListener { next() }
-//            cameraButton.setOnClickListener{ askCameraPermissions() }
-            cameraButton.setOnClickListener{ test() }
+            cameraButton.setOnClickListener{ askCameraPermissions() }
+//            cameraButton.setOnClickListener{ test() }
             requireView().setOnTouchListener { _, event ->
                 if (event.action == MotionEvent.ACTION_DOWN) {
                     if (requireActivity().currentFocus != null && requireActivity().currentFocus!!.windowToken != null) {
@@ -142,7 +142,7 @@ class SurveyImageAnalysisFragment: Fragment() {
         resultLauncher.launch(intent)
         }
     private fun test(){
-        val testImage = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(resources, R.drawable.footulcer), ImagePreprocessing.INPUT_WIDTH, ImagePreprocessing.INPUT_HEIGHT, true)
+        val testImage = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(resources, R.drawable.footulcer2), ImagePreprocessing.INPUT_WIDTH, ImagePreprocessing.INPUT_HEIGHT, true)
         try {
             createImageFile()
         } catch (ex: IOException)
