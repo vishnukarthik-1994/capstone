@@ -6,6 +6,10 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+task wrapper(type: Wrapper){
+    gradleVersion = '8.0'
+}
+
 android {
     compileSdk 32
 
@@ -60,6 +64,7 @@ dependencies {
 
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation 'androidx.recyclerview:recyclerview-selection:1.1.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
@@ -75,7 +80,7 @@ dependencies {
     //TFLite library
     implementation 'org.tensorflow:tensorflow-lite-task-vision:0.3.1'
     // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:29.2.0')
+    implementation platform('com.google.firebase:firebase-bom:30.0.1')
     // Also declare the dependency for the Google Play services library and specify its version
     implementation 'com.google.android.gms:play-services-auth:20.1.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:24.1.0'
@@ -83,10 +88,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth-ktx'
     // Declare the dependency for the Cloud Storage library
     implementation 'com.google.firebase:firebase-storage-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
     // Coil
     implementation "io.coil-kt:coil:2.0.0-rc02"
     //line chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-
+    implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
 
 }
