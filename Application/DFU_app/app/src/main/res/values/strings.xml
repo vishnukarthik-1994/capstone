@@ -51,6 +51,9 @@
     <string name="sol_bo">both advice</string>
     <string name="sol_no">none advice</string>
     <string name="sol_da">call 911</string>
+    <!--arduino measurement-->
+    <string name="skip">SKIP</string>
+    <string name="no_bluetooth">no bluetooth</string>
     <!--Welcome View String -->
     <string name="hey">Hey</string>
     <string name="welcome_dfu_assistant">Hey there, \n Welcome to the Diabetic Foot Ulcer(DFU) assistant, \n What can we help you with today?</string>
