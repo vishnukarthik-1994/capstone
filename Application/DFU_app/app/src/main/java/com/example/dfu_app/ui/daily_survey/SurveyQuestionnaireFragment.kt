@@ -13,7 +13,7 @@ import com.example.dfu_app.data.Solutions
 import com.example.dfu_app.databinding.FragmentSurveyQuestionnaireBinding
 
 class SurveyQuestionnaireFragment:Fragment() {
-    private val shareViewModel: SurveyViewModel by activityViewModels()
+    private val viewModel: SurveyViewModel by activityViewModels()
     private var _binding: FragmentSurveyQuestionnaireBinding? = null
     private var mCurrentPosition: Int = 0
     private var check = 0
@@ -58,7 +58,7 @@ class SurveyQuestionnaireFragment:Fragment() {
                     else {
                         //generate the recommendation
                         recommendations = solution.getSolutions(mChoices)
-                        shareViewModel.setRecommendation(recommendations)
+                        viewModel.setRecommendation(recommendations)
                         navigate()
                     }
                     optionNo.isChecked = false

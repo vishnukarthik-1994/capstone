@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import java.io.*
 
 class SurveyViewModel: ViewModel() {
+    var process:Boolean = false
     private val storage = Firebase.storage
     private lateinit var model:PytorchPrediction
     private lateinit var storageRef: StorageReference

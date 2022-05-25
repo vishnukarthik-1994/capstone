@@ -30,9 +30,6 @@
             app:destination="@id/nav_survey_start"
             app:popUpTo="@+id/nav_home"
             app:popUpToInclusive="true"/>
-        <action
-            android:id="@+id/action_nav_home_to_surveyMeasureFragment"
-            app:destination="@id/nav_measure" />
     </fragment>
 
     <fragment
@@ -42,7 +39,7 @@
         tools:layout="@layout/fragment_survey_image_analysis" >
         <action
             android:id="@+id/action_nav_survey_image_analysis_to_nav_survey_questionnaire"
-            app:destination="@id/nav_survey_questionnaire" />
+            app:destination="@id/nav_survey_measure" />
         <action
             android:id="@+id/action_nav_survey_image_analysis_to_nav_daily_survey_start"
             app:destination="@id/nav_survey_start" />
@@ -96,8 +93,14 @@
         tools:layout="@layout/fragment_setting" >
     </fragment>
     <fragment
-        android:id="@+id/nav_measure"
+        android:id="@+id/nav_survey_measure"
         android:name="com.example.dfu_app.ui.daily_survey.SurveyMeasureFragment"
         android:label="fragment_survey_measurement"
-        tools:layout="@layout/fragment_survey_measurement" />
+        tools:layout="@layout/fragment_survey_measurement" >
+        <action
+            android:id="@+id/action_nav_survey_measure_to_nav_survey_questionnaire"
+            app:destination="@id/nav_survey_questionnaire"
+            app:popUpTo="@+id/nav_survey_measure"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

@@ -7,11 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import com.example.dfu_app.databinding.FragmentHomeBinding
+import com.example.dfu_app.ui.daily_survey.SurveyViewModel
 
 
 class HomeFragment : Fragment() {
+    private val viewModel: SurveyViewModel by activityViewModels()
     private var _binding: FragmentHomeBinding? = null
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -21,7 +24,7 @@ class HomeFragment : Fragment() {
         super.onStart()
         // check first login
         newUser = requireActivity().intent.getBooleanExtra("back",false)
-        if (newUser) {
+        if (newUser && !viewModel.process) {
             val action = HomeFragmentDirections.actionNavHomeToNavSurveyStart()
             requireView().findNavController().navigate(action)
         }

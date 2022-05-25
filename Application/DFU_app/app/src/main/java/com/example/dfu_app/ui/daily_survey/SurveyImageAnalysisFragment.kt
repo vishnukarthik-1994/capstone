@@ -42,7 +42,7 @@ import java.util.*
 
 class SurveyImageAnalysisFragment: Fragment() {
 
-    private val shareViewModel: SurveyViewModel by activityViewModels()
+    private val viewModel: SurveyViewModel by activityViewModels()
     private val CAMERA_PERM_CODE = 101
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private lateinit var currentPhotoPath: String
@@ -75,7 +75,7 @@ class SurveyImageAnalysisFragment: Fragment() {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     binding.footImage.setImageBitmap(ImagePreprocessing.loadingImg( currentPhotoPath ))
-                    shareViewModel.prediction(ImagePreprocessing.loadingImg( currentPhotoPath ),currentPhotoPath, timeStamp)
+                    viewModel.prediction(ImagePreprocessing.loadingImg( currentPhotoPath ),currentPhotoPath, timeStamp)
                 }
             }
         return binding.root
@@ -84,7 +84,7 @@ class SurveyImageAnalysisFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bind()
-        shareViewModel.loadingModel(requireContext().assets)
+        viewModel.loadingModel(requireContext().assets)
     }
     override fun onDestroyView() {
         super.onDestroyView()
@@ -150,7 +150,7 @@ class SurveyImageAnalysisFragment: Fragment() {
             Log.d(TAG, "Create Fail failed")
         }
         timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        shareViewModel.prediction(testImage,currentPhotoPath,timeStamp)
+        viewModel.prediction(testImage,currentPhotoPath,timeStamp)
     }
 
     private fun next(){
