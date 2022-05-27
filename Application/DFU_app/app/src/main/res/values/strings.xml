@@ -18,8 +18,6 @@
     <string name="menu_survey_question">Question</string>
     <!--Daily Survey String -->
     <string name="sloganTakePicture">Take picture of your foot</string>
-    <string name="data">data</string>
-    <string name="measure">Measure</string>
     <string name="sloganMeasure">Connect your device</string>
     <string name="take_picture">Take a picture of your foot</string>
     <string name="blood_pressure">Blood Pressure</string>
@@ -52,8 +50,13 @@
     <string name="sol_no">none advice</string>
     <string name="sol_da">call 911</string>
     <!--arduino measurement-->
+    <string name="notification">Please put your foot on sensor</string>
     <string name="skip">SKIP</string>
+    <string name="data">data</string>
+    <string name="measure">Measure</string>
     <string name="no_bluetooth">no bluetooth</string>
+    <string name="find_device">Connecting to arduino</string>
+    <string name="waiting_response">receiving data</string>
     <!--Welcome View String -->
     <string name="hey">Hey</string>
     <string name="welcome_dfu_assistant">Hey there, \n Welcome to the Diabetic Foot Ulcer(DFU) assistant, \n What can we help you with today?</string>

@@ -20,11 +20,11 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.dfu_app.R
 import com.example.dfu_app.databinding.FragmentSurveyMeasurementBinding
 import com.example.dfu_app.ui.error_message.ErrorMessage.setErrorMessage
-import java.nio.ByteBuffer
+import com.example.dfu_app.ui.error_message.ErrorMessage.setMessage
 
 
 class SurveyMeasureFragment: Fragment() {
@@ -44,7 +44,7 @@ class SurveyMeasureFragment: Fragment() {
     private val deviceName:String = "DFU Nano"
     private val handler = Handler()
     // Stops scanning after 10 seconds.
-    private val SCAN_PERIOD: Long = 50000
+    private val SCAN_PERIOD: Long = 20000
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bluetoothManager = (requireContext().getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager)
@@ -79,7 +79,10 @@ class SurveyMeasureFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
         bind()
+        setMessage(requireContext(),getString(R.string.notification))
     }
     @SuppressLint("ClickableViewAccessibility")
     private fun bind( ) {
@@ -91,9 +94,7 @@ class SurveyMeasureFragment: Fragment() {
             }
             measureButton.setOnClickListener { askBluetoothPermission()
                 measureButton.isEnabled = false}
-            submitButton.setOnClickListener {
-                val action = SurveyMeasureFragmentDirections.actionNavSurveyMeasureToNavSurveyQuestionnaire()
-                requireView().findNavController().navigate(action)}
+            submitButton.setOnClickListener { next()}
         }
     }
     //ask bluetooth permission
@@ -121,6 +122,7 @@ class SurveyMeasureFragment: Fragment() {
                 connectToDevice(device)
                 found = true
                 setErrorMessage(requireContext(),"Success connect to $deviceName")
+                binding.measureButton.text = getString(R.string.waiting_response)
             }
         }
     }
@@ -129,13 +131,19 @@ class SurveyMeasureFragment: Fragment() {
         scanning = false
         bluetoothLeScanner?.stopScan(leScanCallback)
         binding.measureButton.isEnabled = true
+        binding.measureButton.text = getString(R.string.measure)
+        Log.i(ContentValues.TAG, "Stop service discovery")
     }
     @SuppressLint("MissingPermission")
     private fun scanLeDevice() {
+        //avoid the device is already be occupied
+        disconnectDevice()
+        found = false
         Log.d(ContentValues.TAG, "start scanning")
         if (!scanning) {
             // Stops scanning after a pre-defined scan period.
             handler.postDelayed(stopLeScan(), SCAN_PERIOD)
+            binding.measureButton.text = getString(R.string.find_device)
             // Start the scan
             scanning = true
             bluetoothLeScanner?.startScan(leScanCallback)
@@ -152,6 +160,8 @@ class SurveyMeasureFragment: Fragment() {
             try {
                 // connect to the GATT server on the device
                 bluetoothGatt = adapter.getRemoteDevice(device.address).connectGatt(requireContext(), false, bluetoothGattCallback)
+                bluetoothLeScanner?.stopScan(leScanCallback)
+                Log.i(ContentValues.TAG, "Stop sign trigger by connectToDevice func")
             } catch (exception: IllegalArgumentException) {
                 Log.w(ContentValues.TAG, "Device not found with provided address.  Unable to connect.")
             }
@@ -169,14 +179,12 @@ class SurveyMeasureFragment: Fragment() {
             } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 // disconnected from the GATT Server
                 Log.i(ContentValues.TAG, "Disconnecting GATT service ")
-                bluetoothGatt?.close()
             }
         }
         @SuppressLint("MissingPermission")
         override fun onServicesDiscovered(gatt: BluetoothGatt?, status: Int) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
-                Log.i(ContentValues.TAG, "Services discovered: ")
-                Log.i(ContentValues.TAG, gatt?.services.toString())
+                Log.i(ContentValues.TAG, "Services discovered")
                 checkAndConnectToHRM(bluetoothGatt?.services)
             } else {
                 Log.w(ContentValues.TAG, "onServicesDiscovered received: $status")
@@ -192,7 +200,8 @@ class SurveyMeasureFragment: Fragment() {
             super.onCharacteristicRead(gatt, characteristic, status)
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 val data = characteristic!!.getStringValue(0)
-                binding.data.text = data
+                viewModel.getFootTemp(data)
+                Log.w(ContentValues.TAG, "Foot Temperature: $data")
             }
         }
 
@@ -203,6 +212,8 @@ class SurveyMeasureFragment: Fragment() {
         ) {
             super.onCharacteristicChanged(gatt, characteristic)
             Log.i(ContentValues.TAG, characteristic?.value?.get(1)?.toUByte().toString())
+            val data = characteristic!!.getStringValue(0)
+            Log.w(ContentValues.TAG, "Updated Foot Temperature: $data")
         }
     }
 
@@ -210,14 +221,20 @@ class SurveyMeasureFragment: Fragment() {
     private fun checkAndConnectToHRM(services: List<BluetoothGattService>?) {
         Log.i(ContentValues.TAG, "Checking for HRM Service")
         services?.forEach { service ->
-            Log.i(ContentValues.TAG, service.uuid.toString())
             if (service.uuid == GattAttributes.TEMPERATURE_SERVICE_UUID){
-                Log.i(ContentValues.TAG, "Found arduino device")
+                Log.i(ContentValues.TAG, "Receive arduino response")
                 val characteristic = service.getCharacteristic(GattAttributes.TEMPERATURE_MEASUREMENT_UUID)
                 bluetoothGatt?.readCharacteristic(characteristic)
-
             }
         }
     }
-
+    @SuppressLint("MissingPermission")
+    private fun disconnectDevice() {
+        bluetoothGatt?.disconnect()
+    }
+    private fun next(){
+        disconnectDevice()
+        val action = SurveyMeasureFragmentDirections.actionNavSurveyMeasureToNavSurveyQuestionnaire()
+        this.findNavController().navigate(action)
+    }
 }

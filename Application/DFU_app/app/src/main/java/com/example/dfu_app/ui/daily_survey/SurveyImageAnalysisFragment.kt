@@ -27,6 +27,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
@@ -94,6 +95,7 @@ class SurveyImageAnalysisFragment: Fragment() {
     private fun bind( ) {
         binding.apply {
             submitDailSurveyButton.setOnClickListener { next() }
+            testButton.setOnClickListener { test() }
             cameraButton.setOnClickListener{ askCameraPermissions() }
 //            cameraButton.setOnClickListener{ test() }
             requireView().setOnTouchListener { _, event ->
@@ -142,6 +144,7 @@ class SurveyImageAnalysisFragment: Fragment() {
         resultLauncher.launch(intent)
         }
     private fun test(){
+        binding.footImage.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.footulcer2, null))
         val testImage = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(resources, R.drawable.footulcer2), ImagePreprocessing.INPUT_WIDTH, ImagePreprocessing.INPUT_HEIGHT, true)
         try {
             createImageFile()

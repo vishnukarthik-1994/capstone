@@ -4,7 +4,10 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.Bitmap
+import android.text.Spannable
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.dfu_app.model.PytorchPrediction
@@ -25,6 +28,8 @@ class SurveyViewModel: ViewModel() {
     private val dp: FirebaseFirestore = Firebase.firestore
     private val users = dp.collection("users")
     private val userEmail = Firebase.auth.currentUser!!.email!!
+    private val _footTemp = MutableLiveData<String>()
+    val footTemp: LiveData<String> = _footTemp
     private lateinit var recordData:MutableMap<String,Any>
     fun loadingModel(assetManager: AssetManager){
         try {
@@ -33,6 +38,9 @@ class SurveyViewModel: ViewModel() {
         catch(e:FileNotFoundException){
             e.printStackTrace()
         }
+    }
+    fun getFootTemp(temp:String) {
+        _footTemp.postValue("$temp F")
     }
     fun prediction(source:Bitmap,path:String, timeStamp:String){
         viewModelScope.launch {
@@ -50,6 +58,7 @@ class SurveyViewModel: ViewModel() {
                 recordData["Infection"] = count[1].toString()
                 recordData["Ischemia"] = count[2].toString()
                 recordData["None"] = count[3].toString()
+                recordData["FootTemperature"] = footTemp
                 //upload image
                 storageRef = storage.reference.child("$userEmail/$fileName" )
                 val uploadTask =storageRef.putStream(stream)
