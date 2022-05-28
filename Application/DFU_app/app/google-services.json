@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "820018843059-7fmgn4uhpkne9kmjdkrp9fqh2o7iqjdq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dfu_app",
+            "certificate_hash": "a5afeb2a1eefc3be6fc4d53351791083bd63a437"
+          }
+        },
+        {
           "client_id": "820018843059-kaamukh3bu5jsvaur2ff88kpldmocgav.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
