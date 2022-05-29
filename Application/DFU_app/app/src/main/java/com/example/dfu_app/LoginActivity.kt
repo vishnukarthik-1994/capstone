@@ -2,11 +2,9 @@ package com.example.dfu_app
 
 import android.app.Activity
 import android.content.ContentValues.TAG
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -33,23 +31,23 @@ class LoginActivity : AppCompatActivity() {
     private val navIntent = Intent()
     private var signOut = false
     private var back:Boolean = false
-    private var allUsers = mutableMapOf<String,Int>()
+    private var allUsers = mutableSetOf<String>()
     override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
         back = intent.getBooleanExtra("back",false)
-        if (currentUser != null && !back){
-            user = currentUser.email!!
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser?.email
+        if (currentUser != null && !back && allUsers.contains(currentUser.toString())){
             navIntent.setClass(this, MainActivity::class.java)
-            //intent.setClass(this, SignUpActivity::class.java)
-            navIntent.putExtra("user",user)
             startActivity(navIntent)
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        // Check if user is signed in (non-null) and update UI accordingly.
+        // Get all users from db
+        getUsers()
         //listen return result from launched intent
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -69,8 +67,6 @@ class LoginActivity : AppCompatActivity() {
                     ErrorMessage.setErrorMessage(applicationContext,getString(R.string.internet_unavailable))
                 }
             }
-        // Get all users from db
-        getUsers()
         // Initialize Firebase Auth
         auth = Firebase.auth
         // Configure Google Sign In
@@ -97,10 +93,10 @@ class LoginActivity : AppCompatActivity() {
         resultLauncher.launch(signInIntent)
     }
     private fun getUsers(){
-        users.get().addOnSuccessListener{
-            for (doc in it) {
-                allUsers[doc.get("user").toString()] = 1
-            }
+        val docs = users.get()
+        while (!docs.isComplete) {}
+        for (doc in docs.result) {
+            allUsers.add(doc.get("user").toString())
         }
     }
     //Connect to firebase google authentication

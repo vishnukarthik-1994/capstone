@@ -1,10 +1,8 @@
 package com.example.dfu_app.ui.daily_survey
 
 import android.content.ContentValues
-import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.Bitmap
-import android.text.Spannable
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -30,6 +28,11 @@ class SurveyViewModel: ViewModel() {
     private val userEmail = Firebase.auth.currentUser!!.email!!
     private val _footTemp = MutableLiveData<String>()
     val footTemp: LiveData<String> = _footTemp
+    private var bdFootTemp = ""
+    private val _btnMeasure = MutableLiveData<Boolean>()
+    val btnMeasure: LiveData<Boolean> = _btnMeasure
+    private val _status = MutableLiveData<String>()
+    val status: LiveData<String> = _status
     private lateinit var recordData:MutableMap<String,Any>
     fun loadingModel(assetManager: AssetManager){
         try {
@@ -39,9 +42,20 @@ class SurveyViewModel: ViewModel() {
             e.printStackTrace()
         }
     }
+
     fun getFootTemp(temp:String) {
         _footTemp.postValue("$temp F")
+        bdFootTemp = temp
     }
+
+    fun setMeasureBtn(enable:Boolean) {
+        _btnMeasure.postValue(enable)
+    }
+
+    fun setStatus(msg:String) {
+        _status.postValue(msg)
+    }
+
     fun prediction(source:Bitmap,path:String, timeStamp:String){
         viewModelScope.launch {
             try{
@@ -58,7 +72,7 @@ class SurveyViewModel: ViewModel() {
                 recordData["Infection"] = count[1].toString()
                 recordData["Ischemia"] = count[2].toString()
                 recordData["None"] = count[3].toString()
-                recordData["FootTemperature"] = footTemp
+                recordData["FootTemperature"] = bdFootTemp
                 //upload image
                 storageRef = storage.reference.child("$userEmail/$fileName" )
                 val uploadTask =storageRef.putStream(stream)
@@ -73,6 +87,7 @@ class SurveyViewModel: ViewModel() {
             }
         }
     }
+
     fun setRecommendation(Recommendation:ArrayList<String>) {
         var recommendation = ""
         for (suggestion in Recommendation) {
@@ -83,4 +98,5 @@ class SurveyViewModel: ViewModel() {
         //upload data to cloud
         users.document(userEmail).collection("record").document(recordData["date"].toString()).set(recordData)
     }
+
 }
