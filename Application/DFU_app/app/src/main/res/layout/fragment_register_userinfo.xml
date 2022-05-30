@@ -59,21 +59,38 @@
         app:layout_constraintTop_toBottomOf="@id/weight" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/height"
-        android:layout_width="match_parent"
+        android:id="@+id/height_feet"
+        android:layout_width="150dp"
         android:layout_height="45dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/height_text">
-
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/height_edit_text"
+            android:id="@+id/height_feet_edit_text"
             android:padding="12dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/feet"
+            android:gravity="center|end"
+            android:textAlignment="center"
+            android:inputType="numberDecimal" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/height_inch"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/height_text">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/height_inch_edit_text"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/inch"
             android:gravity="center|end"
             android:textAlignment="center"
             android:inputType="numberDecimal" />
@@ -86,8 +103,8 @@
         android:layout_marginTop="16dp"
         android:text="@string/age"
         android:textColor="@color/black"
-        app:layout_constraintStart_toStartOf="@id/height"
-        app:layout_constraintTop_toBottomOf="@id/height" />
+        app:layout_constraintStart_toStartOf="@id/height_feet"
+        app:layout_constraintTop_toBottomOf="@id/height_feet" />
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/age"
         android:layout_width="match_parent"
@@ -100,7 +117,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/age_edit_text"
-            android:hint="@string/year"
+            android:hint="@string/age"
             android:padding="12dp"
             android:gravity="center|end"
             android:textAlignment="center"

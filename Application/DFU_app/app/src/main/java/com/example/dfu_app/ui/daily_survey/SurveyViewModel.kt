@@ -90,6 +90,7 @@ class SurveyViewModel: ViewModel() {
     fun setRecommendation(Recommendation:ArrayList<String>) {
         var recommendation = ""
         for (suggestion in Recommendation) {
+            recommendation += "\u2022 "
             recommendation += suggestion
             recommendation += "\n"
         }

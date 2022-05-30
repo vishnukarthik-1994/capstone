@@ -16,9 +16,6 @@ import com.example.dfu_app.MainActivity
 import com.example.dfu_app.R
 import com.example.dfu_app.databinding.FragmentRegisterUserinfoBinding
 import com.example.dfu_app.ui.error_message.ErrorMessage.setErrorMessage
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-
 
 class RegisterUserInfoFragment: Fragment() {
 
@@ -35,7 +32,7 @@ class RegisterUserInfoFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentRegisterUserinfoBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -66,15 +63,25 @@ class RegisterUserInfoFragment: Fragment() {
     }
     private fun next(){
         //check height
-        if ( !viewModel.checkInput(binding.heightEditText.text.toString())){
-            binding.height.isErrorEnabled = true
-            binding.height.error = getString(R.string.emptyInput)
+        if ( !viewModel.checkInput(binding.heightFeetEditText.text.toString())){
+            binding.heightFeet.isErrorEnabled = true
+            binding.heightFeet.error = getString(R.string.emptyInput)
             setErrorMessage(requireContext(),getString(R.string.emptyInput))
             return
         }
         else
         {
-            binding.height.isErrorEnabled = false
+            binding.heightFeet.isErrorEnabled = false
+        }
+        if ( !viewModel.checkInput(binding.heightInchEditText.text.toString())){
+            binding.heightInch.isErrorEnabled = true
+            binding.heightInch.error = getString(R.string.emptyInput)
+            setErrorMessage(requireContext(),getString(R.string.emptyInput))
+            return
+        }
+        else
+        {
+            binding.heightInch.isErrorEnabled = false
         }
         //check weight
         if ( !viewModel.checkInput(binding.weightEditText.text.toString())){
@@ -98,7 +105,8 @@ class RegisterUserInfoFragment: Fragment() {
         {
             binding.age.isErrorEnabled = false
         }
-        viewModel.setInfo(binding.weightEditText.text.toString()
+        viewModel.setInfo(binding.heightFeetEditText.text.toString()
+                        ,binding.heightInchEditText.text.toString()
                         ,binding.weightEditText.text.toString()
                         ,binding.ageEditText.text.toString())
         viewModel.uploadUserToDp()

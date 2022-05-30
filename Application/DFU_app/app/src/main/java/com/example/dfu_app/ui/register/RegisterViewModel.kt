@@ -9,7 +9,8 @@ class RegisterViewModel: ViewModel() {
     private lateinit var _user:String
     private lateinit var _firstName:String
     private lateinit var _lastName:String
-    private var _height:Double = 0.0
+    private var _heightFeet:Int = 0
+    private var _heightInch:Double = 0.0
     private var _weight:Double = 0.0
     private var _age:Int = 0
     private val dp:FirebaseFirestore = Firebase.firestore
@@ -25,8 +26,9 @@ class RegisterViewModel: ViewModel() {
         _firstName = firstname
         _lastName = lastname
     }
-    fun setInfo(height: String,weight: String,age: String){
-        _height = height.toDouble()
+    fun setInfo(heightFeet: String, heightInch: String,weight: String,age: String){
+        _heightFeet = heightFeet.toInt()
+        _heightInch = heightInch.toDouble()
         _weight = weight.toDouble()
         _age = age.toInt()
     }
@@ -37,7 +39,7 @@ class RegisterViewModel: ViewModel() {
             "lastName" to _lastName,
             "age" to _age,
             "weight" to _weight,
-            "height" to _height
+            "height" to "$_heightFeet'$_heightInch"
         )
         users.document(_user).set(userInfo)
     }
