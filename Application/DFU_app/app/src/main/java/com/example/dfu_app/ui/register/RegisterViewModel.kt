@@ -4,10 +4,8 @@ import androidx.lifecycle.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.launch
-//
-class RegisterViewModel: ViewModel() {
 
+class RegisterViewModel: ViewModel() {
     private lateinit var _user:String
     private lateinit var _firstName:String
     private lateinit var _lastName:String
@@ -44,7 +42,7 @@ class RegisterViewModel: ViewModel() {
         users.document(_user).set(userInfo)
     }
 }
-class RegisterViewModelFactory() : ViewModelProvider.Factory{
+class RegisterViewModelFactory: ViewModelProvider.Factory{
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(RegisterViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

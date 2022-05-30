@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.dfu_app.databinding.FragmentSurveyStartBinding
 
@@ -21,7 +20,7 @@ class SurveyStartFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         //remove previous view
         container?.removeAllViews()
         _binding = FragmentSurveyStartBinding.inflate(inflater, container, false)

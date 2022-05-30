@@ -16,4 +16,5 @@
     <color name="gold">#FAF2AF</color>
     <color name="blue_background">#05277A</color>
     <color name="blue_content">#1AA8F5</color>
+    <color name="transparent">#80000000</color>
 </resources>

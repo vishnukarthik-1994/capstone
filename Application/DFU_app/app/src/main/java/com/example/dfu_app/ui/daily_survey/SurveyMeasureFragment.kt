@@ -107,9 +107,10 @@ class SurveyMeasureFragment : Fragment() {
     }
 
     private fun next() {
-        bluetoothProtocol.disconnectDevice()
-        val action =
-            SurveyMeasureFragmentDirections.actionNavSurveyMeasureToNavSurveyQuestionnaire()
+        if (bluetoothModule) {
+            bluetoothProtocol.disconnectDevice()
+        }
+        val action = SurveyMeasureFragmentDirections.actionNavSurveyMeasureToNavSurveyQuestionnaire()
         this.findNavController().navigate(action)
     }
 }

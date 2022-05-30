@@ -1,16 +1,8 @@
 package com.example.dfu_app
 
-
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Environment
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -18,9 +10,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.example.dfu_app.databinding.ActivityMainBinding
 import com.example.dfu_app.imageprocessor.ImagePreprocessing
-import com.example.dfu_app.ui.daily_survey.SurveyViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration

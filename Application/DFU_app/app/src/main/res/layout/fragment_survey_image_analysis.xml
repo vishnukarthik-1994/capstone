@@ -6,23 +6,30 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".ui.daily_survey.SurveyImageAnalysisFragment">
+
+    <ImageView
+        android:id="@+id/upper_color"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/color_background" />
 
     <TextView
         android:id="@+id/take_picture_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:text="@string/sloganTakePicture"
-        android:textSize="26sp"
+        android:textSize="20sp"
         android:layout_gravity="center"
         android:gravity="center"
         android:lineSpacingExtra="5dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textAppearance="?attr/textAppearanceHeadline6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textAppearance="?attr/textAppearanceHeadline6"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/upper_color"
+        app:layout_constraintBottom_toBottomOf="@+id/upper_color"/>
     <ImageView
         android:id="@+id/foot_image"
         android:layout_width="360dp"
@@ -33,7 +40,7 @@ xmlns:tools="http://schemas.android.com/tools"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/take_picture_text"
+        app:layout_constraintTop_toBottomOf="@+id/upper_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/footprint" />
     <Button
@@ -70,7 +77,7 @@ xmlns:tools="http://schemas.android.com/tools"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="@string/next"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/foot_image"
         app:layout_constraintStart_toStartOf="@+id/foot_image"
         app:layout_constraintTop_toBottomOf="@+id/camera_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>

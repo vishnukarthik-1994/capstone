@@ -47,7 +47,7 @@ class RegisterNameFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         //remove previous view
         container?.removeAllViews()
         _binding = FragmentRegisterUsernameBinding.inflate(inflater, container, false)

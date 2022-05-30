@@ -28,14 +28,6 @@ object GattAttributes {
     var TEMPERATURE_MEASUREMENT = "00002a37-0000-1000-8000-00805f9b34fb"
     var TEMPERATURE_MEASUREMENT_UUID = UUID.fromString("00002a6e-0000-1000-8000-00805f9b34fb")
     var TEMPERATURE_SERVICE_UUID = UUID.fromString("0000181A-0000-1000-8000-00805f9b34fb")
-    val CHARACTERISTIC_UPDATE_NOTIFICATION_DESCRIPTOR_UUID =
-        UUID.fromString("00002902-0000-1000-8000-00805f9b34fb")
-
-    var CLIENT_CHARACTERISTIC_CONFIG = "00002902-0000-1000-8000-00805f9b34fb"
-    fun lookup(uuid: String?, defaultName: String): String {
-        val name = attributes[uuid]
-        return name ?: defaultName
-    }
 
     init {
         // Sample Services.

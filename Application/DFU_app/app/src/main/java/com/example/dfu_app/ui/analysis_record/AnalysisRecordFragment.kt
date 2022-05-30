@@ -57,7 +57,7 @@ class AnalysisRecordFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAnalysisRecordBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this)[AnalysisRecordViewModel::class.java]
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
@@ -77,26 +77,32 @@ class AnalysisRecordFragment: Fragment() {
     private fun bind( ) {
         binding.apply {
             infectionButton.setOnClickListener {
-                infectionButton.textSize = 16f
-                bothButton.textSize = 14f
-                ischemiaButton.textSize = 14f
-//                infectionButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.darkBlue))
-//                bothButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.grey))
-//                ischemiaButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.grey))
+                infectionButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
+                infectionButton.background = ContextCompat.getDrawable(requireContext(),R.drawable.button_record)
+                ischemiaButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.darkBlue))
+                ischemiaButton.background.alpha = 0
+                bothButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.darkBlue))
+                bothButton.background.alpha = 0
                 ulcerType = 1
                 drawRecords()
             }
             ischemiaButton.setOnClickListener {
-                infectionButton.textSize = 14f
-                bothButton.textSize = 14f
-                ischemiaButton.textSize = 16f
+                infectionButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.darkBlue))
+                infectionButton.background.alpha = 0
+                ischemiaButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
+                ischemiaButton.background = ContextCompat.getDrawable(requireContext(),R.drawable.button_record)
+                bothButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.darkBlue))
+                bothButton.background.alpha = 0
                 ulcerType = 2
                 drawRecords()
             }
             bothButton.setOnClickListener {
-                infectionButton.textSize = 14f
-                bothButton.textSize = 16f
-                ischemiaButton.textSize = 14f
+                infectionButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.darkBlue))
+                infectionButton.background.alpha = 0
+                ischemiaButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.darkBlue))
+                ischemiaButton.background.alpha = 0
+                bothButton.setTextColor(ContextCompat.getColor(requireContext(),R.color.white))
+                bothButton.background = ContextCompat.getDrawable(requireContext(),R.drawable.button_record)
                 ulcerType = 3
                 drawRecords()
             }
@@ -205,7 +211,7 @@ class AnalysisRecordFragment: Fragment() {
     }
     inner class XAxisValueFormatter: ValueFormatter() {
         override fun getAxisLabel(value: Float, axis: AxisBase?): String {
-            var millis = (value  + timeStamp).toLong()
+            val millis = (value  + timeStamp).toLong()
             val formatter = SimpleDateFormat("MMM dd")
             return formatter.format(millis)
         }

@@ -19,12 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/topPart">
+            <ImageView
+                android:id="@+id/upper_color"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/color_background" />
 
             <TextView
                 android:id="@+id/report_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:gravity="center"
                 android:text="@string/diagnosis_report"
                 android:textAppearance="?attr/textAppearanceHeadline6"
@@ -32,55 +38,62 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/upper_color"
+                app:layout_constraintBottom_toBottomOf="@+id/upper_color"/>
             <ImageView
+                android:id="@+id/bar"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/both_button"
-                app:layout_constraintBottom_toBottomOf="@+id/both_button"
+                app:layout_constraintTop_toBottomOf="@+id/upper_color"
                 android:background="@drawable/button_shape" />
             <Button
                 android:id="@+id/both_button"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_height="40dp"
                 android:layout_marginEnd="20dp"
                 android:text="@string/Both"
-                android:textColor="@color/blue_background"
+                android:textColor="@color/darkBlue"
                 android:background="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/report_text" />
+                app:layout_constraintTop_toTopOf="@+id/bar"
+                app:layout_constraintBottom_toBottomOf="@+id/bar" />
             <Button
                 android:id="@+id/ischemia_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:text="@string/ischemia"
-                android:textColor="@color/blue_background"
+                android:textColor="@color/darkBlue"
                 android:background="@android:color/transparent"
                 app:layout_constraintStart_toEndOf="@+id/infection_button"
                 app:layout_constraintEnd_toStartOf="@+id/both_button"
-                app:layout_constraintTop_toBottomOf="@+id/report_text" />
+                app:layout_constraintTop_toTopOf="@+id/bar"
+                app:layout_constraintBottom_toBottomOf="@+id/bar" />
             <Button
                 android:id="@+id/infection_button"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginStart="20dp"
                 android:text="@string/infection"
-                android:textColor="@color/blue_background"
+                android:textColor="@color/darkBlue"
                 android:background="@android:color/transparent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/report_text" />
+                app:layout_constraintTop_toTopOf="@+id/bar"
+                app:layout_constraintBottom_toBottomOf="@+id/bar"/>
 
+<!--            android:textColor="@color/white"-->
+<!--            android:background="@drawable/button_record"-->
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/getTheGraph"
                 android:layout_width="match_parent"

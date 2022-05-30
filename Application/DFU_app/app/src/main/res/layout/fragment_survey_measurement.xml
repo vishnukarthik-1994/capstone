@@ -16,20 +16,26 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
             tools:context=".ui.daily_survey.SurveyMeasureFragment">
 
+            <ImageView
+                android:id="@+id/upper_color"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/color_background" />
             <TextView
                 android:id="@+id/measure_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:text="@string/sloganMeasure"
                 android:textAppearance="?attr/textAppearanceHeadline6"
-                android:textSize="25sp"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="@+id/upper_color"
+                app:layout_constraintBottom_toBottomOf="@+id/upper_color"/>
 
             <ImageView
                 android:id="@+id/foot_image"
@@ -42,7 +48,7 @@
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/measure_title"
+                app:layout_constraintTop_toBottomOf="@+id/upper_color"
                 app:srcCompat="@drawable/foot" />
             <TextView
                 android:id="@+id/data"
@@ -77,11 +83,10 @@
                 android:id="@+id/submit_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="45dp"
                 android:text="@string/next"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/foot_image"
+                app:layout_constraintStart_toStartOf="@+id/foot_image"
                 app:layout_constraintTop_toBottomOf="@+id/measure_button" />
 
 
