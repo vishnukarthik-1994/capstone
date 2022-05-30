@@ -72,7 +72,6 @@ class SurveyViewModel: ViewModel() {
                 recordData["Infection"] = count[1].toString()
                 recordData["Ischemia"] = count[2].toString()
                 recordData["None"] = count[3].toString()
-                recordData["FootTemperature"] = bdFootTemp
                 //upload image
                 storageRef = storage.reference.child("$userEmail/$fileName" )
                 val uploadTask =storageRef.putStream(stream)
@@ -95,6 +94,7 @@ class SurveyViewModel: ViewModel() {
             recommendation += "\n"
         }
         recordData["suggestion"] = recommendation
+        recordData["FootTemperature"] = bdFootTemp
         //upload data to cloud
         users.document(userEmail).collection("record").document(recordData["date"].toString()).set(recordData)
     }

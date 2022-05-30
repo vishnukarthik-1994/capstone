@@ -60,13 +60,30 @@ class AnalysisRecordViewModel: ViewModel(){
             Log.d(ContentValues.TAG, "Get cloud storage Error")
         }
     }
-    private fun separateCount(doc: QueryDocumentSnapshot): HashMap<String, String> {
-        return hashMapOf(
-            "Both" to doc["Both"].toString(),
-            "Infection" to doc["Infection"].toString(),
-            "Ischemia" to doc["Ischemia"].toString(),
-            "None" to doc["None"].toString()
+    private fun separateCount(doc: QueryDocumentSnapshot): String {
+        var msg = "Found:"
+        val map =  hashMapOf(
+            "Both" to doc["Both"].toString().toInt(),
+            "Infection" to doc["Infection"].toString().toInt(),
+            "Ischemia" to doc["Ischemia"].toString().toInt(),
+            "None" to doc["None"].toString().toInt()
         )
+        var ulcerFound = false
+        for (key in map.keys) {
+            val count = map[key]
+            if (count != 0) {
+                msg += " $count $key "
+                ulcerFound = true
+            }
+        }
+        if (!ulcerFound) {
+            msg = "No ulcer found"
+        }
+        var footTemp =  doc["FootTemperature"]
+        if (footTemp != null) {
+            msg += "\nFootTemperature: $footTemp F"
+        }
+        return msg
     }
     private fun getLocalFile(): MutableSet<String>{
         val dir  = File(absolutePath)

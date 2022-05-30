@@ -50,6 +50,8 @@ class BluetoothProtocol(
         scanning = false
         bluetoothLeScanner?.stopScan(leScanCallback)
         Log.i(ContentValues.TAG, "Stop service discovery")
+        viewModel.setMeasureBtn(true)
+        viewModel.setStatus(context.resources.getString(R.string.measure))
     }
 
     @SuppressLint("MissingPermission")

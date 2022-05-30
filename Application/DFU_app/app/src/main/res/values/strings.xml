@@ -90,6 +90,7 @@
     <string name="ischemia">Ischemia</string>
     <string name="infection">Infection</string>
     <string name="Both">Both</string>
+    <string name="noUlcerFound">No ulcer found</string>
     <!--Recommendation Source-->
     <string name="recommendation1">Avoiding soaking of the feet.</string>
     <string name="recommendation2">Having your shoes professionally fitted.</string>

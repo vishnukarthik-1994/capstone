@@ -14,6 +14,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import com.example.dfu_app.R
 import com.example.dfu_app.databinding.FragmentSurveyMeasurementBinding
@@ -38,6 +39,7 @@ class SurveyMeasureFragment : Fragment() {
         super.onCreate(savedInstanceState)
         bluetoothManager =
             (requireContext().getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager)
+        viewModel.getFootTemp("data")
         if (bluetoothManager.adapter != null) {
             bluetoothProtocol = BluetoothProtocol(bluetoothManager, viewModel, requireContext())
             bluetoothModule = true
