@@ -124,6 +124,7 @@ class BluetoothProtocol(
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 val data = characteristic!!.getStringValue(0)
                 viewModel.getFootTemp(data)
+//                viewModel.getFootTemp("80.54")
                 Log.w(ContentValues.TAG, "Foot Temperature: $data")
                 viewModel.setMeasureBtn(true)
                 viewModel.setStatus(context.resources.getString(R.string.measure))

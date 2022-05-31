@@ -1,7 +1,9 @@
 package com.example.dfu_app.ui.daily_survey
 
 import android.annotation.SuppressLint
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,7 @@ import androidx.navigation.findNavController
 import com.example.dfu_app.R
 import com.example.dfu_app.data.Solutions
 import com.example.dfu_app.databinding.FragmentSurveyQuestionnaireBinding
+import com.example.dfu_app.ui.error_message.ErrorMessage.setMessage
 
 class SurveyQuestionnaireFragment:Fragment() {
     private val viewModel: SurveyViewModel by activityViewModels()

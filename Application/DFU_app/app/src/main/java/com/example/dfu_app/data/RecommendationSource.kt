@@ -23,7 +23,8 @@ class Solutions {
     fun getSolutions(choices: ArrayList<Int>): ArrayList<String> {
         val solutions =  arrayListOf<String>()
         val type = choices[0]
-        solutions.add(suggestions[2][(0..suggestions[2].size).random()])
+//        solutions.add(suggestions[2][(0..suggestions[2].size).random()])
+        solutions.add(suggestions[2][(0 until suggestions[2].size).random()])
         when (type) {
             3 -> {
                 solutions.add(suggestions[1][(0 until suggestions[1].size).random()])

@@ -76,12 +76,13 @@ class SurveyViewModel: ViewModel() {
                 storageRef = storage.reference.child("$userEmail/$fileName" )
                 val uploadTask =storageRef.putStream(stream)
                 uploadTask.addOnFailureListener{
-                    Log.d(ContentValues.TAG, "Upload Image:success")
-                }.addOnSuccessListener {
                     Log.d(ContentValues.TAG, "Upload Image:Fail")
+                }.addOnSuccessListener {
+                    Log.d(ContentValues.TAG, "Upload Image:success")
                 }
             }
             catch(e: Exception){
+                Log.d(ContentValues.TAG, "Upload Image to cloud storage failed")
                 e.printStackTrace()
             }
         }

@@ -3,6 +3,7 @@ package com.example.dfu_app.ui.daily_survey
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ContentValues
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
@@ -75,7 +76,9 @@ class SurveyImageAnalysisFragment: Fragment() {
         resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
                 if (result.resultCode == Activity.RESULT_OK) {
+                    Log.d(TAG, "Updated image view")
                     binding.footImage.setImageBitmap(ImagePreprocessing.loadingImg( currentPhotoPath ))
+                    Log.d(TAG, "Sent image to Ml model")
                     viewModel.prediction(ImagePreprocessing.loadingImg( currentPhotoPath ),currentPhotoPath, timeStamp)
                 }
             }
@@ -150,7 +153,7 @@ class SurveyImageAnalysisFragment: Fragment() {
             createImageFile()
         } catch (ex: IOException)
         {
-            Log.d(TAG, "Create Fail failed")
+            Log.d(TAG, "Create File failed")
         }
         timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         viewModel.prediction(testImage,currentPhotoPath,timeStamp)
